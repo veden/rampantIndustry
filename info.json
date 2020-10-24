@@ -1,0 +1,10 @@
+{
+    "name" : "RampantIndustry",
+    "factorio_version" : "1.0",
+    "version" : "1.0.0",
+    "title" : "Rampant Industry",
+    "author" : "Veden",
+    "homepage" : "",
+    "description" : "",
+    "dependencies" : ["base >= 1.0.0"]
+}

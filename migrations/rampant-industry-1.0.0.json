@@ -1,0 +1,39 @@
+{
+    "entity": [
+        ["air-filter-rampant-arsenal", "air-filter-rampant-industry"],
+        ["air-filter-2-rampant-arsenal", "air-filter-2-rampant-industry"],
+        ["advanced-solar-panel-rampant-arsenal", "advanced-solar-panel-rampant-industry"],
+        ["basic-fluid-generator-rampant-arsenal", "basic-fluid-generator-rampant-industry"],
+        ["advanced-accumulator-rampant-arsenal", "advanced-accumulator-rampant-industry"],
+        ["large-storage-tank-rampant-arsenal", "large-storage-tank-rampant-industry"]
+    ],
+    "item": [
+        ["air-filter-rampant-arsenal", "air-filter-rampant-industry"],
+        ["air-filter-2-rampant-arsenal", "air-filter-2-rampant-industry"],
+        ["advanced-solar-panel-rampant-arsenal", "advanced-solar-panel-rampant-industry"],
+        ["basic-fluid-generator-rampant-arsenal", "basic-fluid-generator-rampant-industry"],
+        ["advanced-accumulator-rampant-arsenal", "advanced-accumulator-rampant-industry"],
+        ["large-storage-tank-rampant-arsenal", "large-storage-tank-rampant-industry"]
+    ],
+    "technology": [
+        ["rampant-arsenal-technology-solar-energy-2", "rampant-industry-technology-solar-energy-2"],
+        ["rampant-arsenal-technology-electric-energy-accumulators-2", "rampant-industry-technology-electric-energy-accumulators-2"],
+        ["rampant-arsenal-technology-advanced-lab", "rampant-industry-technology-advanced-lab"],
+        ["rampant-arsenal-technology-large-storage-tank-2", "rampant-industry-technology-large-storage-tank-2"],
+        ["rampant-arsenal-technology-oil-burner", "rampant-industry-technology-oil-burner"]
+    ],
+    "recipe": [
+        ["advanced-accumulator-rampant-arsenal", "advanced-accumulator-rampant-industry"],
+        ["fill-compressed-pollution-fluid-rampant-arsenal-barrel", "fill-compressed-pollution-fluid-rampant-industry-barrel"],
+        ["fill-pollution-fluid-rampant-arsenal-barrel", "fill-pollution-fluid-rampant-industry-barrel"],
+        ["empty-compressed-pollution-fluid-rampant-arsenal-barrel", "empty-compressed-pollution-fluid-rampant-industry-barrel"],
+        ["empty-pollution-fluid-rampant-arsenal-barrel", "empty-pollution-fluid-rampant-industry-barrel"],
+        ["basic-fluid-generator-rampant-arsenal", "basic-fluid-generator-rampant-industry"],
+        ["advanced-lab-rampant-arsenal", "advanced-lab-rampant-industry"],
+        ["advanced-solar-panel-rampant-arsenal", "advanced-solar-panel-rampant-industry"],
+        ["large-storage-tank-rampant-arsenal", "large-storage-tank-rampant-industry"],
+        ["air-filter-pollution-rampant-arsenal", "air-filter-pollution-rampant-industry"],
+        ["air-filter-rampant-arsenal", "air-filter-rampant-industry"],
+        ["air-filter-2-rampant-arsenal", "air-filter-2-rampant-industry"]
+    ]
+}
