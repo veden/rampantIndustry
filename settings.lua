@@ -27,8 +27,8 @@ data:extend({
             type = "bool-setting",
             name = "rampant-industry-enableAirFiltering",
             setting_type = 'startup',
-            hidden = false,
-            default_value = true,
+            hidden = true,
+            default_value = false,
             order = "a[projectile]-a[collide]",
             per_user = false
         },
