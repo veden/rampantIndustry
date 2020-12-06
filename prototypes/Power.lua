@@ -149,6 +149,8 @@ function power.enable()
         scalePicture(2, solarPanel.picture)
         -- scalePicture(2, solarPanel.overlay, true)
 
+        solarPanel.picture.layers[2].shift = {1,0}
+        solarPanel.picture.layers[2].hr_version.shift = {1,0}
         solarPanel.overlay = {
             layers =
                 {
@@ -290,6 +292,9 @@ function power.enable()
         scalePicture(1.8, accumulator.picture)
         scalePicture(1.8, accumulator.charge_animation)
 
+        accumulator.picture.layers[2].shift = {3.2,1}
+        accumulator.picture.layers[2].hr_version.shift = {3.2,1}
+
         accumulator.next_upgrade = nil
 
         local picture = function (tint, repeat_count)
@@ -325,7 +330,7 @@ function power.enable()
                             width = 120,
                             height = 54,
                             repeat_count = repeat_count,
-                            shift = util.by_pixel(28, 6),
+                            shift = {3.2, 1},
                             draw_as_shadow = true,
                             scale = 3.6,
                             hr_version =
@@ -335,7 +340,7 @@ function power.enable()
                                     width = 234,
                                     height = 106,
                                     repeat_count = repeat_count,
-                                    shift = util.by_pixel(29, 6),
+                                    shift = {3.2, 1},
                                     draw_as_shadow = true,
                                     scale = 1.8
                                 }

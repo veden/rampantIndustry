@@ -128,9 +128,6 @@ local function onDeath(event)
     --         end
     --     end
     -- end
-    -- if (entity.name == "air-filter-rampant-industry") or (entity.name == "air-filter-2-rampant-industry") then
-    --     world.airFilterCount = world.airFilterCount - 1
-    -- end
 end
 
 local function onBuilding(event)
@@ -231,38 +228,8 @@ script.on_event(defines.events.on_tick, onAirFiltering)
 
 script.on_event(defines.events.on_selected_entity_changed, onSelectionChanged)
 
--- script.on_event(defines.events.on_entity_died, onRemoval, {
---                     {
---                         name = "air-filter-rampant-industry",
---                         filter = "name"
---                     },
---                     {
---                         name = "air-filter-2-rampant-industry",
---                         filter = "name"
---                     }
--- })
-
--- script.on_event(defines.events.on_robot_mined_entity, onRemoval, {
---                     {
---                         name = "air-filter-rampant-industry",
---                         filter = "name"
---                     },
---                     {
---                         name = "air-filter-2-rampant-industry",
---                         filter = "name"
---                     }
--- })
-
--- script.on_event(defines.events.on_player_mined_entity, onRemoval, {
---                     {
---                         name = "air-filter-rampant-industry",
---                         filter = "name"
---                     },
---                     {
---                         name = "air-filter-2-rampant-industry",
---                         filter = "name"
---                     }
--- })
+-- script.on_event(defines.events.on_entity_died, onRemoval)
+-- script.on_event({defines.events.script_raised_destroy}, onRemoval)
 
 script.on_event(defines.events.on_built_entity, onBuilding, {
                     {
@@ -285,8 +252,6 @@ script.on_event(defines.events.on_robot_built_entity, onBuilding, {
                         filter = "name"
                     }
 })
-
--- script.on_event({defines.events.script_raised_destroy}, onRemoval)
 
 script.on_event({ defines.events.script_raised_built,
                   defines.events.script_raised_revive }, onBuilding)

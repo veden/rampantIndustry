@@ -24,4 +24,11 @@ function scaleUtils.tintPicture(pictureTable, tint)
     end
 end
 
+function scaleUtils.scaleBoundingBox(scale, box)
+    return {
+        {box[1][1] * scale, box[1][2] * scale},
+        {box[2][1] * scale, box[2][2] * scale}
+    }
+end
+
 return scaleUtils

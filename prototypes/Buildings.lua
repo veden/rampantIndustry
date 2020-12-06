@@ -95,6 +95,16 @@ function buildings.enable()
         scalePicture(2, lab.on_animation)
         scalePicture(2, lab.off_animation)
 
+        lab.on_animation.layers[4].shift = {4,0}
+        lab.on_animation.layers[4].hr_version.shift = {4,0}
+        lab.on_animation.layers[2].shift = {0,1.8}
+        lab.on_animation.layers[2].hr_version.shift = {0,1.8}
+
+        lab.off_animation.layers[2].shift = {0,1.8}
+        lab.off_animation.layers[2].hr_version.shift = {0,1.8}
+        lab.off_animation.layers[3].shift = {4,0}
+        lab.off_animation.layers[3].hr_version.shift = {4,0}
+
         local recipe = table.deepcopy(data.raw["recipe"]["lab"])
         recipe.name = "advanced-lab-rampant-industry"
         recipe.enabled = false
@@ -269,7 +279,7 @@ function buildings.enable()
                                 frames = 2,
                                 width = 146,
                                 height = 77,
-                                shift = util.by_pixel(30, 22.5),
+                                shift = util.by_pixel(105, 22.5),
                                 scale = 1,
                                 draw_as_shadow = true,
                                 hr_version =
@@ -279,7 +289,7 @@ function buildings.enable()
                                         frames = 2,
                                         width = 291,
                                         height = 153,
-                                        shift = util.by_pixel(29.75, 22.25),
+                                        shift = util.by_pixel(105, 22.25),
                                         scale = 1,
                                         draw_as_shadow = true
                                     }
@@ -381,7 +391,7 @@ function buildings.enable()
 
         local item = table.deepcopy(data.raw["item"]["storage-tank"])
         item.name = "large-storage-tank-rampant-industry"
-        item.icons = {{icon = item.icon, tint={0.7,0.7,1,1}}}
+        item.icons = {{icon = item.icon, tint={0.8,0.8,1,1}}}
         item.icon = nil
         item.place_result = "large-storage-tank-rampant-industry"
         item.order = "b[fluid]-a[zstorage-tank]"
@@ -727,14 +737,14 @@ function buildings.enable()
         }
         recipe.energy_required = 30
         recipe.hidden = false
-        recipe.enabled = true
+        recipe.enabled = false
         recipe.result = "air-filter-rampant-industry"
 
         local recipe2 = table.deepcopy(data.raw["recipe"]["assembling-machine-1"])
         recipe2.name = "air-filter-2-rampant-industry"
         recipe2.icon = nil
         recipe2.icons = {
-            {icon = "__RampantIndustry__/graphics/icons/air-filter.png", tint = { r=0.7,g=0.7,b=0.9,a=1 }}
+            {icon = "__RampantIndustry__/graphics/icons/air-filter.png", tint = {0.8,0.8,1,1}}
         }
         recipe2.icon_size = 64
         recipe2.icon_mipmaps = 1
@@ -745,9 +755,8 @@ function buildings.enable()
         }
         recipe2.energy_required = 30
         recipe2.hidden = false
-        recipe2.enabled = true
+        recipe2.enabled = false
         recipe2.result = "air-filter-2-rampant-industry"
-
 
         local item = table.deepcopy(data.raw["item"]["assembling-machine-2"])
         item.name = "air-filter-rampant-industry"
@@ -762,7 +771,7 @@ function buildings.enable()
         item2.name = "air-filter-2-rampant-industry"
         item2.icon = nil
         item2.icons = {
-            {icon = "__RampantIndustry__/graphics/icons/air-filter.png", tint = { r=0.7,g=0.7,b=0.9,a=1 }}
+            {icon = "__RampantIndustry__/graphics/icons/air-filter.png", tint = {0.8,0.8,1,1}}
         }
         item2.place_result = "air-filter-2-rampant-industry"
         item2.order = "c[zzassembling-machine-3]"
@@ -779,7 +788,7 @@ function buildings.enable()
         recipePollution.normal.hide_from_player_crafting = true
         recipePollution.normal.hidden = false
         recipePollution.normal.enabled = true
-        recipePollution.normal.emissions_multiplier = -3
+        recipePollution.normal.emissions_multiplier = -1
         recipePollution.normal.allow_as_intermediate = false
         recipePollution.normal.always_show_products = true
         recipePollution.normal.show_amount_in_title = false
@@ -802,7 +811,7 @@ function buildings.enable()
         recipePollution2.normal.hide_from_player_crafting = true
         recipePollution2.normal.hidden = false
         recipePollution2.normal.enabled = true
-        recipePollution2.normal.emissions_multiplier = -5
+        recipePollution2.normal.emissions_multiplier = -3
         recipePollution2.normal.allow_as_intermediate = false
         recipePollution2.normal.always_show_products = true
         recipePollution2.normal.show_amount_in_title = false
@@ -811,7 +820,7 @@ function buildings.enable()
         recipePollution2.normal.results = {
             {type="fluid", name="compressed-pollution-fluid-rampant-industry", amount=90},
             {type="fluid", name="water", amount=50}
-        }        
+        }
 
         addFluid({
                 name="pollution",
@@ -844,6 +853,709 @@ function buildings.enable()
                 item2
         })
     end
+
+    if settings.startup["rampant-industry-enableAdvancedRepairPack"].value then
+        data:extend({
+                {
+                    type = "repair-tool",
+                    name = "advanced-repair-pack-rampant-industry",
+                    icons = {{ icon="__base__/graphics/icons/repair-pack.png", icon_size=64, icon_mipmaps=4, tint={0.8,0.8,1,1}}},
+                    icon_size = 64, icon_mipmaps = 4,
+                    subgroup = "tool",
+                    order = "b[repair]-b[repair-pack]",
+                    speed = 3,
+                    durability = 750,
+                    stack_size = 100
+                },
+                {
+                    type = "recipe",
+                    name = "advanced-repair-pack-rampant-industry",
+                    energy_required = 3,
+                    enabled = false,
+                    ingredients =
+                        {
+                            {"electronic-circuit", 2},
+                            {"steel-plate", 2},
+                            {"repair-pack", 1}
+                        },
+                    result = "advanced-repair-pack-rampant-industry"
+                }
+        })
+
+        addEffectToTech("advanced-repair-pack",
+                        {
+                            type = "unlock-recipe",
+                            recipe = "advanced-repair-pack-rampant-industry",
+        })
+    end
+
+    if settings.startup["rampant-industry-enableAdvanceFurnace"].value then
+        local steelFurnace = table.deepcopy(data.raw["furnace"]["steel-furnace"])
+        steelFurnace.name = "advanced-furnace-rampant-industry"
+        steelFurnace.minable.result = "advanced-furnace-rampant-industry"
+        steelFurnace.minable.mining_time = 4
+        steelFurnace.max_health = steelFurnace.max_health * 2
+        scalePicture(1.5, steelFurnace.animation)
+        scalePicture(1.5, steelFurnace.working_visualisations)
+
+        steelFurnace.crafting_speed = 27
+        steelFurnace.collision_box = scaleUtils.scaleBoundingBox(3.9, steelFurnace.collision_box)
+        steelFurnace.selection_box = scaleUtils.scaleBoundingBox(3, steelFurnace.selection_box)
+
+        steelFurnace.animation.layers[2].shift = {5,0.5}
+        steelFurnace.animation.layers[2].hr_version.shift = {5,0.5}
+
+        steelFurnace.working_visualisations[1].animation.shift = {0,0.30}
+        steelFurnace.working_visualisations[1].animation.hr_version.shift = {0,0.30}
+
+        steelFurnace.working_visualisations[2].animation.shift = {0,0}
+
+        steelFurnace.working_visualisations[3].animation.shift = {0,-0.6}
+        steelFurnace.working_visualisations[3].animation.hr_version.shift = {0,-0.6}
+
+        steelFurnace.working_visualisations[4].animation.shift = {0,4}
+        steelFurnace.working_visualisations[4].animation.hr_version.shift = {0,4}
+
+        steelFurnace.fast_replaceable_group = nil
+        steelFurnace.next_upgrade = nil
+
+        steelFurnace.energy_source = {
+            type = "burner",
+            fuel_category = "chemical",
+            effectivity = 1,
+            emissions_per_minute = 54,
+            fuel_inventory_size = 1,
+            light_flicker =
+                {
+                    color = {0,0,0},
+                    minimum_intensity = 0.6,
+                    maximum_intensity = 0.95
+                },
+            smoke =
+                {
+                    {
+                        name = "smoke",
+                        frequency = 10,
+                        position = {3, -3},
+                        starting_vertical_speed = 0.08,
+                        starting_frame_deviation = 60
+                    }
+                }
+        }
+
+        local item = table.deepcopy(data.raw["item"]["steel-furnace"])
+        item.name = "advanced-furnace-rampant-industry"
+        item.icon = nil
+        item.icons = {
+            {icon = "__base__/graphics/icons/steel-furnace.png", icon_size=64, icon_mipmaps=4, tint={0.8,0.8,1,1}}
+        }
+        item.place_result = "advanced-furnace-rampant-industry"
+        item.order = "b[zsteel-furnace]"
+
+        local recipe = table.deepcopy(data.raw["recipe"]["steel-furnace"])
+        recipe.name = "advanced-furnace-rampant-industry"
+        recipe.icons = {
+            {icon = "__base__/graphics/icons/steel-furnace.png", icon_size=64, icon_mipmaps=4, tint={0.8,0.8,1,1}}
+        }
+        recipe.ingredients = {
+            {"steel-plate", 20},
+            {"electronic-circuit", 30},
+            {"chemical-plant", 3},
+            {"steel-furnace", 9}
+        }
+        recipe.energy_required = 30
+        recipe.hidden = false
+        recipe.enabled = false
+        recipe.order = "b[zsteel-furnace]"
+        recipe.result = "advanced-furnace-rampant-industry"
+
+        data:extend{
+            steelFurnace,
+            item,
+            recipe
+        }
+
+        addEffectToTech("advanced-material-processing-3",
+                        {
+                            type = "unlock-recipe",
+                            recipe = "advanced-furnace-rampant-industry",
+        })
+    end
+
+    if settings.startup["rampant-industry-enableAdvanceOilRefinery"].value then
+
+        local refinery = table.deepcopy(data.raw["assembling-machine"]["oil-refinery"])
+        refinery.name = "advanced-oil-refinery-rampant-industry"
+        refinery.minable.result = "advanced-oil-refinery-rampant-industry"
+        refinery.minable.mining_time = 4
+        refinery.max_health = refinery.max_health * 2
+        scalePicture(1.45, refinery.animation)
+        scalePicture(1.45, refinery.working_visualisations)
+
+        refinery.crafting_speed = 13.5
+        refinery.animation.north.layers[1].shift = {0,-1}
+        refinery.animation.north.layers[1].hr_version.shift = {0,-1}
+        refinery.animation.south.layers[1].shift = {0,-1}
+        refinery.animation.south.layers[1].hr_version.shift = {0,-1}
+        refinery.animation.west.layers[1].shift = {0,-1}
+        refinery.animation.west.layers[1].hr_version.shift = {0,-1}
+        refinery.animation.east.layers[1].shift = {0,-1}
+        refinery.animation.east.layers[1].hr_version.shift = {0,-1}
+
+        refinery.animation.north.layers[2].shift = {6,-1}
+        refinery.animation.north.layers[2].hr_version.shift = {6,-1}
+        refinery.animation.south.layers[2].shift = {6,-1}
+        refinery.animation.south.layers[2].hr_version.shift = {6,-1}
+        refinery.animation.west.layers[2].shift = {6,-1}
+        refinery.animation.west.layers[2].hr_version.shift = {6,-1}
+        refinery.animation.east.layers[2].shift = {6,-1}
+        refinery.animation.east.layers[2].hr_version.shift = {6,-1}
+
+        refinery.working_visualisations[1].north_position = {-2.85,-14}
+        refinery.working_visualisations[1].east_position = {-10.625,-13.75}
+        refinery.working_visualisations[1].south_position = {-11.1,-15.75}
+        refinery.working_visualisations[1].west_position = {-0.75,-13.5}
+        refinery.working_visualisations[1].animation.shift = {6, 7}
+        refinery.working_visualisations[1].animation.hr_version.shift = {6, 7}
+
+        refinery.working_visualisations[2].north_animation.shift = {0,-4.9}
+        refinery.working_visualisations[2].north_animation.hr_version.shift = {0,-4.9}
+
+        refinery.working_visualisations[2].east_animation.shift = {-0.1,-4.9}
+        refinery.working_visualisations[2].east_animation.hr_version.shift = {-0.1,-4.9}
+
+        refinery.working_visualisations[2].south_animation.shift = {-0.075,-4.82}
+        refinery.working_visualisations[2].south_animation.hr_version.shift = {-0.075,-4.82}
+
+        refinery.working_visualisations[2].west_animation.shift = {-0.3,-4.85}
+        refinery.working_visualisations[2].west_animation.hr_version.shift = {-0.3,-4.85}
+
+        refinery.collision_box = scaleUtils.scaleBoundingBox(2.95, refinery.collision_box)
+        refinery.selection_box = scaleUtils.scaleBoundingBox(2.5, refinery.selection_box)
+
+        refinery.fast_replaceable_group = nil
+        refinery.next_upgrade = nil
+
+        refinery.fluid_boxes =  {
+            {
+                production_type = "input",
+                pipe_picture = assembler3pipepictures(),
+                pipe_covers = pipecoverspictures(),
+                base_area = 10,
+                base_level = -1,
+                pipe_connections = {{ type="input", position = {-4, 8} }}
+            },
+            {
+                production_type = "input",
+                pipe_picture = assembler3pipepictures(),
+                pipe_covers = pipecoverspictures(),
+                base_area = 10,
+                base_level = -1,
+                pipe_connections = {{ type="input", position = {4, 8} }}
+            },
+            {
+                production_type = "input",
+                pipe_picture = assembler3pipepictures(),
+                pipe_covers = pipecoverspictures(),
+                base_area = 10,
+                base_level = -1,
+                pipe_connections = {{ type="input", position = {-2, 8} }}
+            },
+            {
+                production_type = "input",
+                pipe_picture = assembler3pipepictures(),
+                pipe_covers = pipecoverspictures(),
+                base_area = 10,
+                base_level = -1,
+                pipe_connections = {{ type="input", position = {2, 8} }}
+            },
+            {
+                production_type = "output",
+                pipe_picture = assembler3pipepictures(),
+                pipe_covers = pipecoverspictures(),
+                base_level = 1,
+                pipe_connections = {{ position = {-5, -8} }}
+            },
+            {
+                production_type = "output",
+                pipe_picture = assembler3pipepictures(),
+                pipe_covers = pipecoverspictures(),
+                base_level = 1,
+                pipe_connections = {{ position = {-7, -8} }}
+            },
+            {
+                production_type = "output",
+                pipe_picture = assembler3pipepictures(),
+                pipe_covers = pipecoverspictures(),
+                base_level = 1,
+                pipe_connections = {{ position = {1, -8} }}
+            },
+            {
+                production_type = "output",
+                pipe_picture = assembler3pipepictures(),
+                pipe_covers = pipecoverspictures(),
+                base_level = 1,
+                pipe_connections = {{ position = {-1, -8} }}
+            },
+            {
+                production_type = "output",
+                pipe_picture = assembler3pipepictures(),
+                pipe_covers = pipecoverspictures(),
+                base_level = 1,
+                pipe_connections = {{ position = {5, -8} }}
+            },
+            {
+                production_type = "output",
+                pipe_picture = assembler3pipepictures(),
+                pipe_covers = pipecoverspictures(),
+                base_level = 1,
+                pipe_connections = {{ position = {7, -8} }}
+            }
+        }
+
+        refinery.energy_source =
+            {
+                type = "electric",
+                usage_priority = "secondary-input",
+                emissions_per_minute = 81
+            }
+        refinery.energy_usage = "5859kW"
+
+        local item = table.deepcopy(data.raw["item"]["oil-refinery"])
+        item.name = "advanced-oil-refinery-rampant-industry"
+        item.icon = nil
+        item.icons = {
+            {icon = "__base__/graphics/icons/oil-refinery.png", icon_size=64, icon_mipmaps=4, tint={0.8,0.8,1,1}}
+        }
+        item.place_result = "advanced-oil-refinery-rampant-industry"
+        item.order = "c[zassembling-machine-3]"
+
+        local recipe = table.deepcopy(data.raw["recipe"]["oil-refinery"])
+        recipe.name = "advanced-oil-refinery-rampant-industry"
+        recipe.icons = {
+            {icon = "__base__/graphics/icons/oil-refinery.png", icon_size=64, icon_mipmaps=4, tint={0.8,0.8,1,1}}
+        }
+        recipe.ingredients = {
+            {"steel-plate", 20},
+            {"processing-unit", 30},
+            {"chemical-plant", 2},
+            {"electric-engine-unit", 10},
+            {"oil-refinery", 9}
+        }
+        recipe.energy_required = 30
+        recipe.hidden = false
+        recipe.enabled = false
+        recipe.order = "d[zrefinery]"
+        recipe.result = "advanced-oil-refinery-rampant-industry"
+
+        data:extend{
+            refinery,
+            item,
+            recipe
+        }
+
+        addEffectToTech("oil-processing-2",
+                        {
+                            type = "unlock-recipe",
+                            recipe = "advanced-oil-refinery-rampant-industry",
+        })
+
+    end
+
+    if settings.startup["rampant-industry-enableAdvanceAssembler"].value then
+        local assembler = table.deepcopy(data.raw["assembling-machine"]["assembling-machine-3"])
+        assembler.name = "advanced-assembler-rampant-industry"
+        assembler.minable.result = "advanced-assembler-rampant-industry"
+        assembler.minable.mining_time = 4
+        assembler.max_health = assembler.max_health * 2
+        scalePicture(1.6, assembler.animation)
+
+        assembler.crafting_speed = 16.875
+        assembler.animation.layers[2].shift = {5,0.5}
+        assembler.animation.layers[2].hr_version.shift = {5,0.5}
+
+        assembler.collision_box = scaleUtils.scaleBoundingBox(3.34, assembler.collision_box)
+        assembler.selection_box = scaleUtils.scaleBoundingBox(2.5, assembler.selection_box)
+
+        assembler.fast_replaceable_group = nil
+        assembler.next_upgrade = nil
+
+        assembler.fluid_boxes = {
+            {
+                production_type = "input",
+                pipe_picture = assembler3pipepictures(),
+                pipe_covers = pipecoverspictures(),
+                base_area = 10,
+                base_level = -1,
+                pipe_connections = {{ type="input", position = {1.5, -4.6} }},
+                secondary_draw_orders = { north = -1 }
+            },
+            {
+                production_type = "input",
+                pipe_picture = assembler3pipepictures(),
+                pipe_covers = pipecoverspictures(),
+                base_area = 10,
+                base_level = -1,
+                pipe_connections = {{ type="input", position = {-1.5, -4.6} }},
+                secondary_draw_orders = { north = -1 }
+            },
+            {
+                production_type = "output",
+                pipe_picture = assembler3pipepictures(),
+                pipe_covers = pipecoverspictures(),
+                base_area = 10,
+                base_level = 1,
+                pipe_connections = {{ type="output", position = {1.5, 4.6} }},
+                secondary_draw_orders = { north = -1 }
+            },
+            {
+                production_type = "output",
+                pipe_picture = assembler3pipepictures(),
+                pipe_covers = pipecoverspictures(),
+                base_area = 10,
+                base_level = 1,
+                pipe_connections = {{ type="output", position = {-1.5, 4.6} }},
+                secondary_draw_orders = { north = -1 }
+            },
+            off_when_no_fluid_recipe = true
+        }
+
+        assembler.energy_source =
+            {
+                type = "electric",
+                usage_priority = "secondary-input",
+                emissions_per_minute = 27
+            }
+        assembler.energy_usage = "5MW"
+
+        local item = table.deepcopy(data.raw["item"]["assembling-machine-3"])
+        item.name = "advanced-assembler-rampant-industry"
+        item.icon = nil
+        item.icons = {
+            {icon = "__base__/graphics/icons/assembling-machine-3.png", icon_size=64, icon_mipmaps=4, tint={0.8,0.8,1,1}}
+        }
+        item.place_result = "advanced-assembler-rampant-industry"
+        item.order = "c[zassembling-machine-3]"
+
+        local recipe = table.deepcopy(data.raw["recipe"]["assembling-machine-3"])
+        recipe.name = "advanced-assembler-rampant-industry"
+        recipe.icons = {
+            {icon = "__base__/graphics/icons/assembling-machine-3.png", icon_size=64, icon_mipmaps=4, tint={0.8,0.8,1,1}}
+        }
+        recipe.ingredients = {
+            {"steel-plate", 20},
+            {"processing-unit", 30},
+            {"electric-engine-unit", 10},
+            {"lab", 2},
+            {"assembling-machine-3", 9}
+        }
+        recipe.energy_required = 30
+        recipe.hidden = false
+        recipe.enabled = false
+        recipe.order = "c[zassembling-machine-3]"
+        recipe.result = "advanced-assembler-rampant-industry"
+
+        data:extend{
+            assembler,
+            item,
+            recipe
+        }
+
+        addEffectToTech("automation-4",
+                        {
+                            type = "unlock-recipe",
+                            recipe = "advanced-assembler-rampant-industry",
+        })
+
+    end
+
+    if settings.startup["rampant-industry-enableAdvanceElectricFurnace"].value then
+        local electricFurnace = table.deepcopy(data.raw["furnace"]["electric-furnace"])
+        electricFurnace.name = "advanced-electric-furnace-rampant-industry"
+        electricFurnace.minable.result = "advanced-electric-furnace-rampant-industry"
+        electricFurnace.minable.mining_time = 4
+        electricFurnace.max_health = electricFurnace.max_health * 2
+        scalePicture(1.5, electricFurnace.animation)
+        scalePicture(1.5, electricFurnace.working_visualisations)
+
+        electricFurnace.collision_box = scaleUtils.scaleBoundingBox(3.65, electricFurnace.collision_box)
+        electricFurnace.selection_box = scaleUtils.scaleBoundingBox(2.8, electricFurnace.selection_box)
+
+        electricFurnace.animation.layers[2].shift = {5,0.5}
+        electricFurnace.animation.layers[2].hr_version.shift = {5,0.5}
+
+        electricFurnace.working_visualisations[1].animation.layers[1].shift = {0.15,2.7}
+        electricFurnace.working_visualisations[1].animation.layers[1].hr_version.shift = {0.15,2.7}
+        electricFurnace.working_visualisations[1].animation.layers[1].tint = {0.7,0.7,0.7,1}
+        electricFurnace.working_visualisations[1].animation.layers[1].hr_version.shift = {0.15,2.7}
+        electricFurnace.working_visualisations[1].animation.layers[1].hr_version.tint = {0.7,0.7,0.7,1}
+
+
+        electricFurnace.working_visualisations[1].animation.layers[2].shift = {0.05,-0.35}
+        electricFurnace.working_visualisations[1].animation.layers[2].hr_version.shift = {0.05,-0.35}
+
+        electricFurnace.working_visualisations[2].animation.shift = {0.1,6}
+        electricFurnace.working_visualisations[2].animation.hr_version.shift = {0.1,6}
+
+        electricFurnace.working_visualisations[3].animation.shift = {-2,-2.1}
+        electricFurnace.working_visualisations[3].animation.hr_version.shift = {-2,-2.1}
+
+        electricFurnace.working_visualisations[4].animation.shift = {0.35,-3.885}
+        electricFurnace.working_visualisations[4].animation.hr_version.shift = {0.35,-3.885}
+
+        electricFurnace.fast_replaceable_group = nil
+        electricFurnace.next_upgrade = nil
+
+        electricFurnace.crafting_speed = 27
+
+        electricFurnace.energy_source = {
+            type = "electric",
+            usage_priority = "secondary-input",
+            emissions_per_minute = 13.5
+        }
+
+        electricFurnace.energy_usage = "2511kW"
+
+        local item = table.deepcopy(data.raw["item"]["electric-furnace"])
+        item.name = "advanced-electric-furnace-rampant-industry"
+        item.icon = nil
+        item.icons = {
+            {icon = "__base__/graphics/icons/electric-furnace.png", icon_size=64, icon_mipmaps=4, tint={0.8,0.8,1,1}}
+        }
+        item.place_result = "advanced-electric-furnace-rampant-industry"
+        item.order = "c[zelectric-furnace]"
+
+        local recipe = table.deepcopy(data.raw["recipe"]["electric-furnace"])
+        recipe.name = "advanced-electric-furnace-rampant-industry"
+        recipe.icons = {
+            {icon = "__base__/graphics/icons/electric-furnace.png", icon_size=64, icon_mipmaps=4, tint={0.8,0.8,1,1}}
+        }
+        recipe.ingredients = {
+            {"steel-plate", 20},
+            {"processing-unit", 30},
+            {"stone-furnace", 2},
+            {"electric-furnace", 9}
+        }
+        recipe.energy_required = 30
+        recipe.hidden = false
+        recipe.enabled = false
+        recipe.order = "c[zelectric-furnace]"
+        recipe.result = "advanced-electric-furnace-rampant-industry"
+
+        data:extend{
+            electricFurnace,
+            item,
+            recipe
+        }
+
+        addEffectToTech("advanced-material-processing-4",
+                        {
+                            type = "unlock-recipe",
+                            recipe = "advanced-electric-furnace-rampant-industry",
+        })
+    end
+
+    if settings.startup["rampant-industry-enableAdvanceChemicalPlant"].value then
+        local assembler = table.deepcopy(data.raw["assembling-machine"]["chemical-plant"])
+        assembler.name = "advanced-chemical-plant-rampant-industry"
+        assembler.minable.result = "advanced-chemical-plant-rampant-industry"
+        assembler.minable.mining_time = 4
+        assembler.max_health = assembler.max_health * 2
+        scalePicture(1.5, assembler.animation)
+
+        assembler.crafting_speed = 13.5
+
+        assembler.collision_box = scaleUtils.scaleBoundingBox(3.4, assembler.collision_box)
+        assembler.selection_box = scaleUtils.scaleBoundingBox(2.5, assembler.selection_box)
+
+        assembler.animation.north.layers[1].shift = {0.2,-0.75}
+        assembler.animation.north.layers[1].hr_version.shift = {0.2,-0.75}
+        assembler.animation.south.layers[1].shift = {0.2,-0.75}
+        assembler.animation.south.layers[1].hr_version.shift = {0.2,-0.75}
+        assembler.animation.west.layers[1].shift = {0.075,-0.65}
+        assembler.animation.west.layers[1].hr_version.shift = {0.075,-0.65}
+        assembler.animation.east.layers[1].shift = {0.075,-0.65}
+        assembler.animation.east.layers[1].hr_version.shift = {0.075,-0.65}
+
+        assembler.animation.north.layers[2].shift = {4,0}
+        assembler.animation.north.layers[2].hr_version.shift = {4,0}
+        assembler.animation.south.layers[2].shift = {4,0}
+        assembler.animation.south.layers[2].hr_version.shift = {4,0}
+        assembler.animation.west.layers[2].shift = {4,0}
+        assembler.animation.west.layers[2].hr_version.shift = {4,0}
+        assembler.animation.east.layers[2].shift = {4,0}
+        assembler.animation.east.layers[2].hr_version.shift = {4,0}
+
+        assembler.working_visualisations[3].animation.scale = 2
+        assembler.working_visualisations[3].animation.hr_version.scale = 1
+
+        assembler.working_visualisations[4].animation.scale = 2
+        assembler.working_visualisations[4].animation.hr_version.scale = 1
+
+        assembler.working_visualisations[1].north_animation.shift = {2.25,1.5} -- water
+        assembler.working_visualisations[1].north_animation.scale = 3.3
+        assembler.working_visualisations[1].north_animation.hr_version.shift = {2.25,1.5} 
+        assembler.working_visualisations[1].north_animation.hr_version.scale = 1.65
+        assembler.working_visualisations[2].north_animation.shift = {2.25,1.5} -- foam
+        assembler.working_visualisations[2].north_animation.scale = 3.3
+        assembler.working_visualisations[2].north_animation.hr_version.shift = {2.25,1.5}
+        assembler.working_visualisations[2].north_animation.hr_version.scale = 1.65
+        assembler.working_visualisations[3].north_position = {-1.3,-8.5} -- smoke
+        assembler.working_visualisations[4].north_position = {-1.3,-7.8}
+
+        assembler.working_visualisations[1].east_animation.shift = {0,2.2}
+        assembler.working_visualisations[1].east_animation.scale = 3.3
+        assembler.working_visualisations[1].east_animation.hr_version.shift = {0,2.2}
+        assembler.working_visualisations[1].east_animation.hr_version.scale = 1.65
+        assembler.working_visualisations[2].east_animation.shift = {0,2.2}
+        assembler.working_visualisations[2].east_animation.scale = 3.65
+        assembler.working_visualisations[2].east_animation.hr_version.shift = {0,2.2}
+        assembler.working_visualisations[2].east_animation.hr_version.scale = 1.65
+        assembler.working_visualisations[3].east_position = {1.3,-7.8}
+        assembler.working_visualisations[4].east_position = {1.3,-7.1}
+        
+        assembler.working_visualisations[1].south_animation.shift = {0.1,1.7}
+        assembler.working_visualisations[1].south_animation.scale = 3.3
+        assembler.working_visualisations[1].south_animation.hr_version.shift = {0.1,1.7}
+        assembler.working_visualisations[1].south_animation.hr_version.scale = 1.65
+        assembler.working_visualisations[2].south_animation.shift = {0.1,1.7}
+        assembler.working_visualisations[2].south_animation.scale = 3.65
+        assembler.working_visualisations[2].south_animation.hr_version.shift = {0.1,1.7}
+        assembler.working_visualisations[2].south_animation.hr_version.scale = 1.65
+        assembler.working_visualisations[3].south_position = {0.6,-7.2}
+        assembler.working_visualisations[4].south_position = {0.6,-6.5}
+        
+
+        assembler.working_visualisations[1].west_animation.shift = {-1,1.5}
+        assembler.working_visualisations[1].west_animation.scale = 3.3
+        assembler.working_visualisations[1].west_animation.hr_version.shift = {-1,1.5}
+        assembler.working_visualisations[1].west_animation.hr_version.scale = 1.65
+        assembler.working_visualisations[2].west_animation.shift = {-1,1.5}
+        assembler.working_visualisations[2].west_animation.scale = 3.65
+        assembler.working_visualisations[2].west_animation.hr_version.shift = {-1,1.5}
+        assembler.working_visualisations[2].west_animation.hr_version.scale = 1.65
+        assembler.working_visualisations[3].west_position = {-1.5,-6.9}
+        assembler.working_visualisations[4].west_position = {-1.5,-6.2}
+
+
+        assembler.fast_replaceable_group = nil
+        assembler.next_upgrade = nil
+
+        assembler.fluid_boxes = {
+            {
+                production_type = "input",
+                pipe_covers = pipecoverspictures(),
+                base_area = 10,
+                base_level = -1,
+                pipe_connections = {{ type="input", position = {2, -5} }},
+                secondary_draw_orders = { north = -1 }
+            },
+            {
+                production_type = "input",
+                pipe_covers = pipecoverspictures(),
+                base_area = 10,
+                base_level = -1,
+                pipe_connections = {{ type="input", position = {4, -5} }},
+                secondary_draw_orders = { north = -1 }
+            },
+            {
+                production_type = "input",
+                pipe_covers = pipecoverspictures(),
+                base_area = 10,
+                base_level = -1,
+                pipe_connections = {{ type="input", position = {-2, -5} }},
+                secondary_draw_orders = { north = -1 }
+            },
+            {
+                production_type = "input",
+                pipe_covers = pipecoverspictures(),
+                base_area = 10,
+                base_level = -1,
+                pipe_connections = {{ type="input", position = {-4, -5} }},
+                secondary_draw_orders = { north = -1 }
+            },
+            {
+                production_type = "output",
+                pipe_covers = pipecoverspictures(),
+                base_area = 10,
+                base_level = 1,
+                pipe_connections = {{ type="output", position = {2, 5} }},
+                secondary_draw_orders = { north = -1 }
+            },
+            {
+                production_type = "output",
+                pipe_covers = pipecoverspictures(),
+                base_area = 10,
+                base_level = 1,
+                pipe_connections = {{ type="output", position = {4, 5} }},
+                secondary_draw_orders = { north = -1 }
+            },
+            {
+                production_type = "output",
+                pipe_covers = pipecoverspictures(),
+                base_area = 10,
+                base_level = 1,
+                pipe_connections = {{ type="output", position = {-2, 5} }},
+                secondary_draw_orders = { north = -1 }
+            },
+            {
+                production_type = "output",
+                pipe_covers = pipecoverspictures(),
+                base_area = 10,
+                base_level = 1,
+                pipe_connections = {{ type="output", position = {-4, 5} }},
+                secondary_draw_orders = { north = -1 }
+            },
+            off_when_no_fluid_recipe = false
+        }
+
+        assembler.energy_source =
+            {
+                type = "electric",
+                usage_priority = "secondary-input",
+                emissions_per_minute = 54
+            }
+        assembler.energy_usage = "2929kW"
+
+        local item = table.deepcopy(data.raw["item"]["chemical-plant"])
+        item.name = "advanced-chemical-plant-rampant-industry"
+        item.icon = nil
+        item.icons = {
+            {icon = "__base__/graphics/icons/chemical-plant.png", icon_size=64, icon_mipmaps=4, tint={0.8,0.8,1,1}}
+        }
+        item.place_result = "advanced-chemical-plant-rampant-industry"
+        item.order = "c[zassembling-machine-3]"
+
+        local recipe = table.deepcopy(data.raw["recipe"]["chemical-plant"])
+        recipe.name = "advanced-chemical-plant-rampant-industry"
+        recipe.icons = {
+            {icon = "__base__/graphics/icons/chemical-plant.png", icon_size=64, icon_mipmaps=4, tint={0.8,0.8,1,1}}
+        }
+        recipe.ingredients = {
+            {"steel-plate", 20},
+            {"steel-furnace", 2},
+            {"electric-engine-unit", 10},
+            {"chemical-plant", 9}
+        }
+        recipe.energy_required = 30
+        recipe.hidden = false
+        recipe.enabled = false
+        recipe.order = "e[zchemical-plant]"
+        recipe.result = "advanced-chemical-plant-rampant-industry"
+
+        data:extend{
+            assembler,
+            item,
+            recipe
+        }
+
+        addEffectToTech("advanced-chemical-plant-2",
+                        {
+                            type = "unlock-recipe",
+                            recipe = "advanced-chemical-plant-rampant-industry",
+        })
+    end
+
 end
 
 return buildings

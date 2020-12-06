@@ -25,6 +25,8 @@ function technologies.enable()
         makeTechnology({
                 name="large-storage-tank-2",
                 icon="__base__/graphics/technology/fluid-handling.png",
+                iconSize=256,
+                iconMipmaps=4,
                 prerequisites = {"fluid-handling"},
                 effects = {},
                 ingredients = {
@@ -35,7 +37,7 @@ function technologies.enable()
                 time = 30
         })
     end
-    
+
     if settings.startup["rampant-industry-enableOilBurner"].value then
         makeTechnology({
                 name = "oil-burner",
@@ -50,7 +52,122 @@ function technologies.enable()
                 time = 30
         })
     end
-    
+
+    if settings.startup["rampant-industry-enableAdvancedRepairPack"].value then
+        makeTechnology({
+                name = "advanced-repair-pack",
+                icon="__base__/graphics/icons/repair-pack.png",
+                iconSize=64,
+                iconMipmaps=4,
+                prerequisites = {"logistic-science-pack", "steel-processing"},
+                effects = {},
+                count = 120,
+                ingredients = {
+                    {"automation-science-pack", 1},
+                    {"logistic-science-pack", 1},
+                },
+                time = 30
+        })
+    end
+
+    if settings.startup["rampant-industry-enableAdvanceFurnace"].value then
+        makeTechnology({
+                name = "advanced-material-processing-3",
+                icon="__base__/graphics/technology/advanced-material-processing.png",
+                iconSize=256,
+                iconMipmaps=4,
+                prerequisites = {"advanced-material-processing", "steel-processing"},
+                effects = {},
+                count = 200,
+                ingredients = {
+                    {"automation-science-pack", 1},
+                    {"logistic-science-pack", 1},
+                    {"chemical-science-pack", 1},
+                    {"production-science-pack", 1}
+                },
+                time = 30
+        })
+    end
+
+    if settings.startup["rampant-industry-enableAdvanceElectricFurnace"].value then
+        makeTechnology({
+                name = "advanced-material-processing-4",
+                icon="__base__/graphics/technology/advanced-material-processing-2.png",
+                iconSize=256,
+                iconMipmaps=4,
+                prerequisites = {"advanced-material-processing-2"},
+                effects = {},
+                count = 300,
+                ingredients = {
+                    {"automation-science-pack", 1},
+                    {"logistic-science-pack", 1},
+                    {"chemical-science-pack", 1},
+                    {"production-science-pack", 1},
+                    {"utility-science-pack", 1}
+                },
+                time = 60
+        })
+    end
+
+    if settings.startup["rampant-industry-enableAdvanceOilRefinery"].value then
+        makeTechnology({
+                name = "oil-processing-2",
+                icon="__base__/graphics/technology/oil-processing.png",
+                iconSize=256,
+                iconMipmaps=4,
+                prerequisites = {"advanced-oil-processing", "productivity-module-2"},
+                effects = {},
+                count = 300,
+                ingredients = {
+                    {"automation-science-pack", 1},
+                    {"logistic-science-pack", 1},
+                    {"chemical-science-pack", 1},
+                    {"production-science-pack", 1},
+                    {"utility-science-pack", 1}
+                },
+                time = 60
+        })
+    end
+
+    if settings.startup["rampant-industry-enableAdvanceAssembler"].value then
+        makeTechnology({
+                name = "automation-4",
+                icon="__base__/graphics/technology/automation-3.png",
+                iconSize=256,
+                iconMipmaps=4,
+                prerequisites = {"automation-3", "productivity-module-2"},
+                effects = {},
+                count = 300,
+                ingredients = {
+                    {"automation-science-pack", 1},
+                    {"logistic-science-pack", 1},
+                    {"chemical-science-pack", 1},
+                    {"production-science-pack", 1},
+                    {"utility-science-pack", 1}
+                },
+                time = 60
+        })
+    end
+
+    if settings.startup["rampant-industry-enableAdvanceChemicalPlant"].value then
+        makeTechnology({
+                name = "advanced-chemical-plant-2",
+                icon="__base__/graphics/technology/oil-gathering.png",
+                iconSize=256,
+                iconMipmaps=4,
+                prerequisites = {"automation-3", "productivity-module-2"},
+                effects = {},
+                count = 300,
+                ingredients = {
+                    {"automation-science-pack", 1},
+                    {"logistic-science-pack", 1},
+                    {"chemical-science-pack", 1},
+                    {"production-science-pack", 1},
+                    {"utility-science-pack", 1}
+                },
+                time = 60
+        })        
+    end    
 end
 
 return technologies
