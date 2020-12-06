@@ -890,8 +890,14 @@ function buildings.enable()
     end
 
     if settings.startup["rampant-industry-enableAdvanceFurnace"].value then
+        local corpse = table.deepcopy(data.raw["corpse"]["steel-furnace-remnants"])
+        corpse.name = "advanced-furnace-corpse-rampant-industry"
+        scalePicture(1.5, corpse.animation)
+
+
         local steelFurnace = table.deepcopy(data.raw["furnace"]["steel-furnace"])
         steelFurnace.name = "advanced-furnace-rampant-industry"
+        steelFurnace.corpse = "advanced-furnace-corpse-rampant-industry"
         steelFurnace.minable.result = "advanced-furnace-rampant-industry"
         steelFurnace.minable.mining_time = 4
         steelFurnace.max_health = steelFurnace.max_health * 2
@@ -970,6 +976,7 @@ function buildings.enable()
         recipe.result = "advanced-furnace-rampant-industry"
 
         data:extend{
+            corpse,
             steelFurnace,
             item,
             recipe
@@ -984,8 +991,14 @@ function buildings.enable()
 
     if settings.startup["rampant-industry-enableAdvanceOilRefinery"].value then
 
+        local corpse = table.deepcopy(data.raw["corpse"]["oil-refinery-remnants"])
+        corpse.name = "advanced-oil-refinery-corpse-rampant-industry"
+        scalePicture(1.5, corpse.animation)
+
+
         local refinery = table.deepcopy(data.raw["assembling-machine"]["oil-refinery"])
         refinery.name = "advanced-oil-refinery-rampant-industry"
+        refinery.corpse = "advanced-oil-refinery-corpse-rampant-industry"
         refinery.minable.result = "advanced-oil-refinery-rampant-industry"
         refinery.minable.mining_time = 4
         refinery.max_health = refinery.max_health * 2
@@ -1149,6 +1162,7 @@ function buildings.enable()
         recipe.result = "advanced-oil-refinery-rampant-industry"
 
         data:extend{
+            corpse,
             refinery,
             item,
             recipe
@@ -1163,8 +1177,14 @@ function buildings.enable()
     end
 
     if settings.startup["rampant-industry-enableAdvanceAssembler"].value then
+        local corpse = table.deepcopy(data.raw["corpse"]["assembling-machine-3-remnants"])
+        corpse.name = "advanced-assembler-corpse-rampant-industry"
+        scalePicture(1.5, corpse.animation)
+
+
         local assembler = table.deepcopy(data.raw["assembling-machine"]["assembling-machine-3"])
         assembler.name = "advanced-assembler-rampant-industry"
+        assembler.corpse = "advanced-assembler-corpse-rampant-industry"
         assembler.minable.result = "advanced-assembler-rampant-industry"
         assembler.minable.mining_time = 4
         assembler.max_health = assembler.max_health * 2
@@ -1256,6 +1276,7 @@ function buildings.enable()
         recipe.result = "advanced-assembler-rampant-industry"
 
         data:extend{
+            corpse,
             assembler,
             item,
             recipe
@@ -1270,8 +1291,14 @@ function buildings.enable()
     end
 
     if settings.startup["rampant-industry-enableAdvanceElectricFurnace"].value then
+        local corpse = table.deepcopy(data.raw["corpse"]["electric-furnace-remnants"])
+        corpse.name = "advanced-electric-furnace-corpse-rampant-industry"
+        scalePicture(1.5, corpse.animation)
+
+
         local electricFurnace = table.deepcopy(data.raw["furnace"]["electric-furnace"])
         electricFurnace.name = "advanced-electric-furnace-rampant-industry"
+        electricFurnace.corpse = "advanced-electric-furnace-corpse-rampant-industry"
         electricFurnace.minable.result = "advanced-electric-furnace-rampant-industry"
         electricFurnace.minable.mining_time = 4
         electricFurnace.max_health = electricFurnace.max_health * 2
@@ -1343,6 +1370,7 @@ function buildings.enable()
         recipe.result = "advanced-electric-furnace-rampant-industry"
 
         data:extend{
+            corpse,
             electricFurnace,
             item,
             recipe
@@ -1356,8 +1384,14 @@ function buildings.enable()
     end
 
     if settings.startup["rampant-industry-enableAdvanceChemicalPlant"].value then
+        local corpse = table.deepcopy(data.raw["corpse"]["chemical-plant-remnants"])
+        corpse.name = "advanced-chemical-plant-corpse-rampant-industry"
+        scalePicture(1.5, corpse.animation)
+
+
         local assembler = table.deepcopy(data.raw["assembling-machine"]["chemical-plant"])
         assembler.name = "advanced-chemical-plant-rampant-industry"
+        assembler.corpse = "advanced-chemical-plant-corpse-rampant-industry"
         assembler.minable.result = "advanced-chemical-plant-rampant-industry"
         assembler.minable.mining_time = 4
         assembler.max_health = assembler.max_health * 2
@@ -1394,7 +1428,7 @@ function buildings.enable()
 
         assembler.working_visualisations[1].north_animation.shift = {2.25,1.5} -- water
         assembler.working_visualisations[1].north_animation.scale = 3.3
-        assembler.working_visualisations[1].north_animation.hr_version.shift = {2.25,1.5} 
+        assembler.working_visualisations[1].north_animation.hr_version.shift = {2.25,1.5}
         assembler.working_visualisations[1].north_animation.hr_version.scale = 1.65
         assembler.working_visualisations[2].north_animation.shift = {2.25,1.5} -- foam
         assembler.working_visualisations[2].north_animation.scale = 3.3
@@ -1413,7 +1447,7 @@ function buildings.enable()
         assembler.working_visualisations[2].east_animation.hr_version.scale = 1.65
         assembler.working_visualisations[3].east_position = {1.3,-7.8}
         assembler.working_visualisations[4].east_position = {1.3,-7.1}
-        
+
         assembler.working_visualisations[1].south_animation.shift = {0.1,1.7}
         assembler.working_visualisations[1].south_animation.scale = 3.3
         assembler.working_visualisations[1].south_animation.hr_version.shift = {0.1,1.7}
@@ -1424,7 +1458,7 @@ function buildings.enable()
         assembler.working_visualisations[2].south_animation.hr_version.scale = 1.65
         assembler.working_visualisations[3].south_position = {0.6,-7.2}
         assembler.working_visualisations[4].south_position = {0.6,-6.5}
-        
+
 
         assembler.working_visualisations[1].west_animation.shift = {-1,1.5}
         assembler.working_visualisations[1].west_animation.scale = 3.3
@@ -1544,6 +1578,7 @@ function buildings.enable()
         recipe.result = "advanced-chemical-plant-rampant-industry"
 
         data:extend{
+            corpse,
             assembler,
             item,
             recipe

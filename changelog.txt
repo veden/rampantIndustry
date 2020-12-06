@@ -1,4 +1,10 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.0.2
+Date: 05. 12. 2020
+  Bugfixes:
+    - Fixed corpse for advanced oil refinery, chemical plant, assembler, furnace, and electric furnace
+
+---------------------------------------------------------------------------------------------------
 Version: 1.0.1
 Date: 05. 12. 2020
   Improvements:
