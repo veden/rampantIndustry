@@ -421,6 +421,7 @@ function buildings.enable()
         airFilter.match_speed_to_activity = true
         airFilter.match_volume_to_activity = true
         airFilter.crafting_speed = 1
+        airFilter.module_specification.module_slots = 0
         airFilter.fast_replaceable_group = nil
         airFilter.default_recipe_tint = {
             primary = {r=0,g=1,b=1,a=1},
@@ -567,11 +568,13 @@ function buildings.enable()
         airFilter2.crafting_categories = { "air-filter-rampant-industry" }
         airFilter2.minable = {mining_time=2,result="air-filter-2-rampant-industry"}
         airFilter2.next_upgrade = nil
+        airFilter2.max_health = airFilter2.max_health * 2
         airFilter2.energy_usage = "2250KW"
         airFilter2.energy_source.drain = "1500KW"
         airFilter2.match_speed_to_activity = true
         airFilter2.match_volume_to_activity = true
         airFilter2.crafting_speed = 1
+        airFilter2.module_specification.module_slots = 0
         airFilter2.fast_replaceable_group = nil
         airFilter2.animation = {
             layers =
@@ -732,8 +735,10 @@ function buildings.enable()
         recipe.icon_mipmaps = 1
         recipe.ingredients = {
             {"steel-plate", 20},
-            {"electronic-circuit", 30},
-            {"storage-tank", 16}
+            {"electronic-circuit", 15},
+            {"assembling-machine-2", 1},
+            {"chemical-plant", 1},
+            {"pump", 1}
         }
         recipe.energy_required = 30
         recipe.hidden = false
@@ -749,9 +754,11 @@ function buildings.enable()
         recipe2.icon_size = 64
         recipe2.icon_mipmaps = 1
         recipe2.ingredients = {
-            {"steel-plate", 20},
-            {"electronic-circuit", 30},
-            {"storage-tank", 16}
+            {"steel-plate", 25},
+            {"advanced-circuit", 20},
+            {"steam-turbine", 1},
+            {"chemical-plant", 2},
+            {"pump", 1}
         }
         recipe2.energy_required = 30
         recipe2.hidden = false
@@ -782,21 +789,20 @@ function buildings.enable()
         recipePollution.subgroup = "raw-material"
         recipePollution.normal.ingredients = {
             {type="fluid",name="pollution-fluid-rampant-industry", amount=20},
-            {type="fluid",name="water", amount=60}
+            {name="clean-air-filter-rampant-industry", amount=2}
         }
-        recipePollution.normal.energy_required = 60
+        recipePollution.normal.energy_required = 90
         recipePollution.normal.hide_from_player_crafting = true
         recipePollution.normal.hidden = false
         recipePollution.normal.enabled = true
-        recipePollution.normal.emissions_multiplier = -1
+        recipePollution.normal.emissions_multiplier = -10
         recipePollution.normal.allow_as_intermediate = false
         recipePollution.normal.always_show_products = true
         recipePollution.normal.show_amount_in_title = false
         recipePollution.normal.result = nil
-        recipePollution.normal.main_product = "compressed-pollution-fluid-rampant-industry"
+        -- recipePollution.normal.main_product = "compressed-pollution-fluid-rampant-industry"
         recipePollution.normal.results = {
-            {type="fluid", name="compressed-pollution-fluid-rampant-industry", amount=40},
-            {type="fluid", name="water", amount=40}
+            {name="dirty-air-filter-rampant-industry", amount=2}
         }
 
         local recipePollution2 = table.deepcopy(data.raw["recipe"]["assembling-machine-2"])
@@ -804,22 +810,71 @@ function buildings.enable()
         recipePollution2.category = "air-filter-rampant-industry"
         recipePollution2.subgroup = "raw-material"
         recipePollution2.normal.ingredients = {
-            {type="fluid",name="pollution-fluid-rampant-industry", amount=40},
-            {type="fluid",name="water", amount=100}
+            {type="fluid",name="pollution-fluid-rampant-industry", amount=60},
+            {name="clean-air-filter-rampant-industry", amount=6}
         }
-        recipePollution2.normal.energy_required = 60
+        recipePollution2.normal.energy_required = 90
         recipePollution2.normal.hide_from_player_crafting = true
         recipePollution2.normal.hidden = false
         recipePollution2.normal.enabled = true
-        recipePollution2.normal.emissions_multiplier = -3
+        recipePollution2.normal.emissions_multiplier = -40
         recipePollution2.normal.allow_as_intermediate = false
         recipePollution2.normal.always_show_products = true
         recipePollution2.normal.show_amount_in_title = false
         recipePollution2.normal.result = nil
-        recipePollution2.normal.main_product = "compressed-pollution-fluid-rampant-industry"
+        -- recipePollution2.normal.main_product = "compressed-pollution-fluid-rampant-industry"
         recipePollution2.normal.results = {
-            {type="fluid", name="compressed-pollution-fluid-rampant-industry", amount=90},
-            {type="fluid", name="water", amount=50}
+            {name="dirty-air-filter-rampant-industry", amount=6}
+        }
+
+        local recipeAirFilter = table.deepcopy(data.raw["recipe"]["assembling-machine-2"])
+        recipeAirFilter.name = "clean-air-filter-rampant-industry"
+        recipeAirFilter.category = "crafting-with-fluid"
+        recipeAirFilter.subgroup = "intermediate-product"
+        recipeAirFilter.normal.ingredients = {
+            {name="plastic-bar", amount=5},
+            {type="fluid", name="water", amount=20},
+            {name="empty-barrel", amount=1}
+        }
+        recipeAirFilter.normal.energy_required = 20
+        recipeAirFilter.normal.hide_from_player_crafting = true
+        recipeAirFilter.normal.hidden = false
+        recipeAirFilter.normal.enabled = false
+        -- recipeAirFilter.normal.emissions_multiplier = -3
+        recipeAirFilter.normal.allow_as_intermediate = false
+        recipeAirFilter.normal.always_show_products = true
+        recipeAirFilter.normal.show_amount_in_title = false
+        recipeAirFilter.normal.result = nil
+        -- recipeAirFilter.normal.main_product = "compressed-pollution-fluid-rampant-industry"
+        recipeAirFilter.normal.results = {
+            {name="clean-air-filter-rampant-industry", amount=1}
+        }
+
+        local recipeCleanAirFilter = table.deepcopy(data.raw["recipe"]["assembling-machine-2"])
+        recipeCleanAirFilter.name = "dirty-air-filter-rampant-industry"
+        recipeCleanAirFilter.category = "chemistry"
+        recipeCleanAirFilter.subgroup = "intermediate-product"
+        recipeCleanAirFilter.icon = "__RampantIndustry__/graphics/icons/dirty-air-filter.png"
+        recipeCleanAirFilter.icon_size = 64
+        recipeCleanAirFilter.icon_mipmaps = 1
+        recipeCleanAirFilter.normal.ingredients = {
+            {name="dirty-air-filter-rampant-industry", amount=1},
+            {type="fluid", name="sulfuric-acid", amount=5}
+        }
+        recipeCleanAirFilter.normal.energy_required = 15
+        recipeCleanAirFilter.normal.hide_from_player_crafting = true
+        recipeCleanAirFilter.normal.hidden = false
+        recipeCleanAirFilter.normal.enabled = false
+        -- recipeCleanAirFilter.normal.emissions_multiplier = -3
+        recipeCleanAirFilter.normal.allow_as_intermediate = false
+        recipeCleanAirFilter.normal.always_show_products = true
+        recipeCleanAirFilter.normal.show_amount_in_title = false
+        recipeCleanAirFilter.normal.result = nil
+        -- recipeCleanAirFilter.normal.main_product = "compressed-pollution-fluid-rampant-industry"
+        recipeCleanAirFilter.normal.results = {
+            {name="clean-air-filter-rampant-industry", amount=1, probability = 0.95},
+            {name="coal", amount=10},
+            {type="fluid", name="water", amount=15}
         }
 
         addFluid({
@@ -838,11 +893,35 @@ function buildings.enable()
                 tint = {r=0.5, g=0.5, b=0.5, a=1}
         })
 
+        cleanAirFilter = {
+            type = "item",
+            name = "clean-air-filter-rampant-industry",
+            icon = "__RampantIndustry__/graphics/icons/clean-air-filter.png",
+            icon_size = 64, icon_mipmaps = 1,
+            subgroup = "raw-material",
+            order = "c[copper-plate]",
+            stack_size = 100
+        }
+
+        dirtyAirFilter = {
+            type = "item",
+            name = "dirty-air-filter-rampant-industry",
+            icon = "__RampantIndustry__/graphics/icons/dirty-air-filter.png",
+            icon_size = 64, icon_mipmaps = 1,
+            subgroup = "raw-material",
+            order = "c[copper-plate]",
+            stack_size = 100
+        }
+
         data:extend({
                 {
                     type="recipe-category",
                     name="air-filter-rampant-industry"
                 },
+                cleanAirFilter,
+                dirtyAirFilter,
+                recipeAirFilter,
+                recipeCleanAirFilter,
                 recipePollution,
                 recipePollution2,
                 airFilter,
@@ -851,6 +930,26 @@ function buildings.enable()
                 recipe2,
                 item,
                 item2
+        })
+
+        addEffectToTech("air-filtering", {
+                            type = "unlock-recipe",
+                            recipe = "air-filter-rampant-industry",
+        })
+
+        addEffectToTech("air-filtering", {
+                            type = "unlock-recipe",
+                            recipe = "clean-air-filter-rampant-industry",
+        })
+
+        addEffectToTech("air-filtering", {
+                            type = "unlock-recipe",
+                            recipe = "dirty-air-filter-rampant-industry",
+        })
+
+        addEffectToTech("air-filtering-2", {
+                            type = "unlock-recipe",
+                            recipe = "air-filter-2-rampant-industry",
         })
     end
 
