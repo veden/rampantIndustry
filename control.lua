@@ -1,32 +1,32 @@
 -- imports
 
-local constants = require("libs/Constants")
+-- local constants = require("libs/Constants")
 local mathUtils = require("libs/MathUtils")
 
 -- constants
 
-local DEFAULT_SPOUT_SIZE = constants.DEFAULT_SPOUT_SIZE
+-- local DEFAULT_SPOUT_SIZE = constants.DEFAULT_SPOUT_SIZE
 
-local RAW_GOO_TYPES = constants.RAW_GOO_TYPES
-local RAMPANT_PREFIX_TABLE = constants.RAMPANT_PREFIX_TABLE
-local DEFAULT_GOO_TYPE = constants.DEFAULT_GOO_TYPE
+-- local RAW_GOO_TYPES = constants.RAW_GOO_TYPES
+-- local RAMPANT_PREFIX_TABLE = constants.RAMPANT_PREFIX_TABLE
+-- local DEFAULT_GOO_TYPE = constants.DEFAULT_GOO_TYPE
 
-local ENABLE_NORMAL_GOO = constants.ENABLE_NORMAL_GOO
-local ENABLE_ALL_GOO = constants.ENABLE_ALL_GOO
-local MENDING_WALL_COOLDOWN = constants.MENDING_WALL_COOLDOWN
+-- local ENABLE_NORMAL_GOO = constants.ENABLE_NORMAL_GOO
+-- local ENABLE_ALL_GOO = constants.ENABLE_ALL_GOO
+-- local MENDING_WALL_COOLDOWN = constants.MENDING_WALL_COOLDOWN
 
-local CHUNK_SIZE = constants.CHUNK_SIZE
-local CHUNK_SIZE_DIVIDER = constants.CHUNK_SIZE_DIVIDER
+-- local CHUNK_SIZE = constants.CHUNK_SIZE
+-- local CHUNK_SIZE_DIVIDER = constants.CHUNK_SIZE_DIVIDER
 
 -- imported functions
 
-local gaussianRandomRange = mathUtils.gaussianRandomRange
+-- local gaussianRandomRange = mathUtils.gaussianRandomRange
 
-local strFind = string.find
-local substr = string.sub
-local mRandom = math.random
+-- local strFind = string.find
+-- local substr = string.sub
+-- local mRandom = math.random
 local mFloor = math.floor
-local mCeil = math.ceil
+-- local mCeil = math.ceil
 
 -- local references
 
@@ -82,7 +82,7 @@ local function onConfigChanged()
             amount=10
         }
 
-        for i,p in ipairs(game.connected_players) do
+        for _,p in ipairs(game.connected_players) do
             p.print("Rampant Industry - Version 1.0.0")
         end
         world.version = 1
@@ -102,7 +102,7 @@ local function onLoad()
 end
 
 local function onDeath(event)
-    local entity = event.entity
+    -- local entity = event.entity
     -- if (event.cause and event.cause.force.name == "player") and (entity.force.name == "enemy") then
     --     if (mRandom() < world.spoutThreshold) then
     --         if (entity.type == "unit-spawner") then
@@ -141,7 +141,7 @@ local function onBuilding(event)
     end
 end
 
-local function onAirFiltering(event)
+local function onAirFiltering()
     if (world.airFilterCursor <= world.airFilter.len) then
         local entity = world.airFilter[world.airFilterCursor]
         if entity.valid then
@@ -166,7 +166,6 @@ local function onAirFiltering(event)
 end
 
 local function onSelectionChanged(event)
-    local player = game.players[event.player_index]
     local selection = game.players[event.player_index].selected
     if selection then
         local previousSelection = world.playerSelection[event.player_index]
@@ -198,8 +197,8 @@ local function onSelectionChanged(event)
     end
 end
 
-local function removePlayerSelection(event)
-    for player,pair in pairs(world.playerSelection) do
+local function removePlayerSelection()
+    for player in pairs(world.playerSelection) do
         local selection = game.players[player].selected
         local previousSelection = world.playerSelection[player]
 
