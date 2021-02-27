@@ -123,6 +123,73 @@ data:extend({
             per_user = false
         },
 
+        {
+            type = "int-setting",
+            name = "rampant-industry--advanced-chemical-plant-module-slots",
+            setting_type = 'startup',
+            min_value = 1,
+            max_value = 32,
+            default_value = 4,
+            order = "a[projectile]-a[collide]",
+            per_user = false
+        },
+
+        {
+            type = "int-setting",
+            name = "rampant-industry--advanced-electric-furnace-module-slots",
+            setting_type = 'startup',
+            min_value = 1,
+            max_value = 32,
+            default_value = 4,
+            order = "a[projectile]-a[collide]",
+            per_user = false
+        },
+
+        {
+            type = "int-setting",
+            name = "rampant-industry--advanced-furnace-module-slots",
+            setting_type = 'startup',
+            min_value = 1,
+            max_value = 32,
+            default_value = 4,
+            order = "a[projectile]-a[collide]",
+            per_user = false
+        },
+
+        {
+            type = "int-setting",
+            name = "rampant-industry--advanced-lab-module-slots",
+            setting_type = 'startup',
+            min_value = 1,
+            max_value = 32,
+            default_value = 4,
+            order = "a[projectile]-a[collide]",
+            per_user = false
+        },
+
+        {
+            type = "int-setting",
+            name = "rampant-industry--advanced-refinery-module-slots",
+            setting_type = 'startup',
+            min_value = 1,
+            max_value = 32,
+            default_value = 4,
+            order = "a[projectile]-a[collide]",
+            per_user = false
+        },
+
+        {
+            type = "int-setting",
+            name = "rampant-industry--advanced-assembler-module-slots",
+            setting_type = 'startup',
+            min_value = 1,
+            max_value = 32,
+            default_value = 4,
+            order = "a[projectile]-a[collide]",
+            per_user = false
+        }
+
+
         -- {
         --     type = "bool-setting",
         --     name = "rampant-industry-infiniteSpouts",

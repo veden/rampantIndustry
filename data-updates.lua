@@ -34,3 +34,16 @@ local constants = require("libs/Constants")
 -- 	    pipe_connections = {{ position = {1, 2} }}
 -- 	}
 --     }
+
+
+if mods["hardened_pipes"] then
+    local entity = data.raw["pipe"]["PCHP-hardened-pipe"]
+    entity.resistances[#entity.resistances+1] = {type="laser",percent=80}
+    entity.resistances[#entity.resistances+1] = {type="electric",percent=80}
+    entity.resistances[#entity.resistances+1] = {type="poison",percent=80}
+
+    entity = data.raw["pipe-to-ground"]["PCHP-hardened-pipe-to-ground"]
+    entity.resistances[#entity.resistances+1] = {type="laser",percent=80}
+    entity.resistances[#entity.resistances+1] = {type="electric",percent=80}
+    entity.resistances[#entity.resistances+1] = {type="poison",percent=80}
+end

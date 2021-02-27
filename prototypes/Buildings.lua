@@ -88,7 +88,7 @@ function buildings.enable()
 
         lab.module_specification =
             {
-                module_slots = 2,
+                module_slots = settings.startup["rampant-industry--advanced-lab-module-slots"].value,
                 module_info_icon_shift = {0, 0.9}
             }
 
@@ -1024,6 +1024,14 @@ function buildings.enable()
         steelFurnace.fast_replaceable_group = nil
         steelFurnace.next_upgrade = nil
 
+        steelFurnace.module_specification =
+            {
+                module_slots = settings.startup["rampant-industry--advanced-furnace-module-slots"].value,
+                module_info_icon_shift = {0, 0.9}
+            }
+
+        steelFurnace.allowed_effects = {"speed", "productivity", "consumption", "pollution"}
+
         steelFurnace.energy_source = {
             type = "burner",
             fuel_category = "chemical",
@@ -1148,6 +1156,12 @@ function buildings.enable()
         refinery.fast_replaceable_group = nil
         refinery.next_upgrade = nil
 
+        refinery.module_specification =
+            {
+                module_slots = settings.startup["rampant-industry--advanced-refinery-module-slots"].value,
+                module_info_icon_shift = {0, 0.9}
+            }
+        
         refinery.fluid_boxes =  {
             {
                 production_type = "input",
@@ -1347,6 +1361,13 @@ function buildings.enable()
             }
         assembler.energy_usage = "5MW"
 
+        assembler.module_specification =
+            {
+                module_slots = settings.startup["rampant-industry--advanced-assembler-module-slots"].value,
+                module_info_icon_shift = {0, 0.9}
+            }
+
+        
         local item = table.deepcopy(data.raw["item"]["assembling-machine-3"])
         item.name = "advanced-assembler-rampant-industry"
         item.icon = nil
@@ -1440,6 +1461,12 @@ function buildings.enable()
             emissions_per_minute = 13.5
         }
 
+        electricFurnace.module_specification =
+            {
+                module_slots = settings.startup["rampant-industry--advanced-electric-furnace-module-slots"].value,
+                module_info_icon_shift = {0, 0.9}
+            }
+        
         electricFurnace.energy_usage = "2511kW"
 
         local item = table.deepcopy(data.raw["item"]["electric-furnace"])
@@ -1574,6 +1601,13 @@ function buildings.enable()
         assembler.fast_replaceable_group = nil
         assembler.next_upgrade = nil
 
+        assembler.module_specification =
+            {
+                module_slots = settings.startup["rampant-industry--advanced-chemical-plant-module-slots"].value,
+                module_info_icon_shift = {0, 0.9}
+            }
+
+        
         assembler.fluid_boxes = {
             {
                 production_type = "input",

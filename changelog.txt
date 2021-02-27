@@ -1,6 +1,11 @@
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.4
 Date: 07. 02. 2021
+  Improvements:
+    - Made advanced structures module slots configurable through a mod setting
+    - Add resistance to hardened pipes mod for electric, poison, and laser
+  Tweaks:
+    - Increased advanced module slots to 4
   Bugfixes:
     - Fixed research appearing to early on research screen
 
