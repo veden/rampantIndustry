@@ -1,6 +1,6 @@
 local scaleUtils = {}
 
-function scaleUtils.scalePicture(scale, pictureTable, shift)
+function scaleUtils.scalePicture(scale, pictureTable)
     for k,v in pairs(pictureTable) do
         if (k == "layers") then
             scaleUtils.scalePicture(scale, v)
@@ -8,13 +8,13 @@ function scaleUtils.scalePicture(scale, pictureTable, shift)
             v.scale = scale
             pictureTable.scale = 2 * scale
         elseif (type(v) == "table") then
-            scaleUtils.scalePicture(scale, v, shift)
+            scaleUtils.scalePicture(scale, v)
         end
     end
 end
 
 function scaleUtils.tintPicture(pictureTable, tint)
-    for k,v in pairs(pictureTable) do
+    for _,v in pairs(pictureTable) do
         if (type(v) == "table") then
             if (v.filename) then
                 v.tint = tint

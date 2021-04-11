@@ -14,6 +14,40 @@ local scalePicture = scaleUtils.scalePicture
 
 function power.enable()
 
+    if settings.startup["rampant-industry--enableFuelEmissions"].value then
+        addFuelToItem({
+                eType = "item",
+                eName = "uranium-fuel-cell",
+                accelerationMutlipler = 1.5,
+                topSpeedMultipler = 1.10,
+                fuelEmissionsMultipler = 3
+        })
+
+        addFuelToItem({
+                eType = "item",
+                eName = "solid-fuel",
+                fuelEmissionsMultipler = 0.75
+        })
+
+        addFuelToItem({
+                eType = "item",
+                eName = "rocket-fuel",
+                fuelEmissionsMultipler = 1.5
+        })
+
+        addFuelToItem({
+                eType = "item",
+                eName = "coal",
+                fuelEmissionsMultipler = 2
+        })
+
+        addFuelToItem({
+                eType = "item",
+                eName = "nuclear-fuel",
+                fuelEmissionsMultipler = 4
+        })
+    end
+
     if settings.startup["rampant-industry-enableOilBurner"].value then
         local oilBurner = makeOilBurner({
                 name = "basic",

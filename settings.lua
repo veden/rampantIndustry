@@ -13,6 +13,14 @@ data:extend({
         -- },
 
 
+        {
+            type = "bool-setting",
+            name = "rampant-industry--enableFuelEmissions",
+            setting_type = 'startup',
+            default_value = true,
+            order = "a[projectile]-a[collide]",
+            per_user = false
+        },
 
         {
             type = "bool-setting",
