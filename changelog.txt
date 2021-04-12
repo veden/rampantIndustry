@@ -2,7 +2,7 @@
 Version: 1.0.5
 Date: 10. 04. 2021
   Improvements:
-    - Added settings to add emissions multiplier for solid, rocket, coal, nuclear, and fuel cell (0.75, 1.5, 2, 4, 3)
+    - Added settings to add emissions multiplier for solid, rocket, coal, nuclear, and fuel cell (0.75, 2, 3, 2.5, 1.5)
 
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.4

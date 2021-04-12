@@ -20,7 +20,7 @@ function power.enable()
                 eName = "uranium-fuel-cell",
                 accelerationMutlipler = 1.5,
                 topSpeedMultipler = 1.10,
-                fuelEmissionsMultipler = 3
+                fuelEmissionsMultipler = 1.5
         })
 
         addFuelToItem({
@@ -32,19 +32,19 @@ function power.enable()
         addFuelToItem({
                 eType = "item",
                 eName = "rocket-fuel",
-                fuelEmissionsMultipler = 1.5
-        })
-
-        addFuelToItem({
-                eType = "item",
-                eName = "coal",
                 fuelEmissionsMultipler = 2
         })
 
         addFuelToItem({
                 eType = "item",
+                eName = "coal",
+                fuelEmissionsMultipler = 3
+        })
+
+        addFuelToItem({
+                eType = "item",
                 eName = "nuclear-fuel",
-                fuelEmissionsMultipler = 4
+                fuelEmissionsMultipler = 2.5
         })
     end
 
