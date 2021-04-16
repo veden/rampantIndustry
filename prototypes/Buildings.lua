@@ -1113,22 +1113,22 @@ function buildings.enable()
         scalePicture(1.45, refinery.working_visualisations)
 
         refinery.crafting_speed = 13.5
-        refinery.animation.north.layers[1].shift = {0,-1}
+        refinery.animation.north.layers[1].shift = {7.5,1.2}
         refinery.animation.north.layers[1].hr_version.shift = {0,-1}
-        refinery.animation.south.layers[1].shift = {0,-1}
+        refinery.animation.south.layers[1].shift = {7.5,1.2}
         refinery.animation.south.layers[1].hr_version.shift = {0,-1}
-        refinery.animation.west.layers[1].shift = {0,-1}
+        refinery.animation.west.layers[1].shift = {7.5,1.2}
         refinery.animation.west.layers[1].hr_version.shift = {0,-1}
-        refinery.animation.east.layers[1].shift = {0,-1}
+        refinery.animation.east.layers[1].shift = {7.5,1.2}
         refinery.animation.east.layers[1].hr_version.shift = {0,-1}
 
-        refinery.animation.north.layers[2].shift = {6,-1}
+        refinery.animation.north.layers[2].shift = {7.5,1.2}
         refinery.animation.north.layers[2].hr_version.shift = {6,-1}
-        refinery.animation.south.layers[2].shift = {6,-1}
+        refinery.animation.south.layers[2].shift = {7.5,1.2}
         refinery.animation.south.layers[2].hr_version.shift = {6,-1}
-        refinery.animation.west.layers[2].shift = {6,-1}
+        refinery.animation.west.layers[2].shift = {7.5,1.2}
         refinery.animation.west.layers[2].hr_version.shift = {6,-1}
-        refinery.animation.east.layers[2].shift = {6,-1}
+        refinery.animation.east.layers[2].shift = {7.5,1.2}
         refinery.animation.east.layers[2].hr_version.shift = {6,-1}
 
         refinery.working_visualisations[1].north_position = {-2.85,-14}

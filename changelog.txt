@@ -1,4 +1,12 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.0.6
+Date: 12. 04. 2021
+  Contributions:
+    - Astorin has contributed an updated RU locale
+  Bugfixes:
+    - Fixed oil refinery offset for low resolution sprite
+
+---------------------------------------------------------------------------------------------------
 Version: 1.0.5
 Date: 10. 04. 2021
   Improvements:
