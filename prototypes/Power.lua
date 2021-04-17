@@ -304,17 +304,17 @@ function power.enable()
 
         local accumulator = table.deepcopy(data.raw["accumulator"]["accumulator"])
         accumulator.name = "advanced-accumulator-rampant-industry"
-        accumulator.collision_box[1][1] = accumulator.collision_box[1][1] * 3.4
-        accumulator.collision_box[1][2] = accumulator.collision_box[1][2] * 3 + 1.8
-        accumulator.collision_box[2][1] = accumulator.collision_box[2][1] * 3.4
-        accumulator.collision_box[2][2] = accumulator.collision_box[2][2] * 3 + 1.8
+        accumulator.collision_box[1][1] = accumulator.collision_box[1][1] * 3.1
+        accumulator.collision_box[1][2] = accumulator.collision_box[1][2] * 2.9 + 1.1
+        accumulator.collision_box[2][1] = accumulator.collision_box[2][1] * 3.1
+        accumulator.collision_box[2][2] = accumulator.collision_box[2][2] * 2.9 + 1.1
 
         accumulator.minable.result = "advanced-accumulator-rampant-industry"
 
-        accumulator.selection_box[1][1] = accumulator.selection_box[1][1] * 3.4
-        accumulator.selection_box[1][2] = accumulator.selection_box[1][2] * 3 + 1.8
-        accumulator.selection_box[2][1] = accumulator.selection_box[2][1] * 3.4
-        accumulator.selection_box[2][2] = accumulator.selection_box[2][2] * 3 + 1.8
+        accumulator.selection_box[1][1] = accumulator.selection_box[1][1] * 3.1
+        accumulator.selection_box[1][2] = accumulator.selection_box[1][2] * 2.9 + 1.1
+        accumulator.selection_box[2][1] = accumulator.selection_box[2][1] * 3.1
+        accumulator.selection_box[2][2] = accumulator.selection_box[2][2] * 2.9 + 1.1
         accumulator.corpse = "advanced-accumulator-remnants-rampant-industry"
 
         accumulator.max_health = 2000
@@ -323,11 +323,11 @@ function power.enable()
         accumulator.energy_source.input_flow_limit = "4MW"
         accumulator.energy_source.output_flow_limit = "4MW"
 
-        scalePicture(1.8, accumulator.picture)
-        scalePicture(1.8, accumulator.charge_animation)
+        scalePicture(1.6, accumulator.picture)
+        scalePicture(1.6, accumulator.charge_animation)
 
-        accumulator.picture.layers[2].shift = {3.2,1}
-        accumulator.picture.layers[2].hr_version.shift = {3.2,1}
+        accumulator.picture.layers[2].shift = {3.2,0}
+        accumulator.picture.layers[2].hr_version.shift = {3.2,0}
 
         accumulator.next_upgrade = nil
 
