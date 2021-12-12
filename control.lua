@@ -83,7 +83,7 @@ local function onConfigChanged()
         }
 
         for _,p in ipairs(game.connected_players) do
-            p.print("Rampant Industry - Version 1.0.5")
+            p.print("Rampant Industry - Version 1.1.0")
         end
         world.version = 1
     end
