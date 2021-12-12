@@ -31,6 +31,12 @@ function power.enable()
 
         addFuelToItem({
                 eType = "item",
+                eName = "wood",
+                fuelEmissionsMultipler = 1.5
+        })
+
+        addFuelToItem({
+                eType = "item",
                 eName = "rocket-fuel",
                 fuelEmissionsMultipler = 2
         })
