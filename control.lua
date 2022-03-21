@@ -149,7 +149,7 @@ local function onAirFiltering()
                 ((entity.energy / entity.prototype.max_energy_usage) > 0.65)) then
                 local amount = entity.surface.get_pollution(entity.position)
                 if (amount > 0) then
-                    world.insertFluidQuery.amount = amount * 3
+                    world.insertFluidQuery.amount = amount * 0.05
                     entity.insert_fluid(world.insertFluidQuery)
                 end
             end
