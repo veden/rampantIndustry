@@ -10,11 +10,13 @@ function technologies.enable()
         makeTechnology({
                 name="advanced-lab",
                 icon="__RampantIndustry__/graphics/technology/advanced-lab.png",
-                prerequisites = {"research-speed-2"},
+                prerequisites = {"research-speed-2", "production-science-pack"},
                 effects = {},
                 ingredients = {
                     {"automation-science-pack", 1},
-                    {"logistic-science-pack", 1}
+                    {"logistic-science-pack", 1},
+                    {"chemical-science-pack", 1},
+                    {"production-science-pack", 1}
                 },
                 count = 800,
                 time = 30
@@ -27,11 +29,13 @@ function technologies.enable()
                 icon="__base__/graphics/technology/fluid-handling.png",
                 iconSize=256,
                 iconMipmaps=4,
-                prerequisites = {"fluid-handling"},
+                prerequisites = {"fluid-handling", "production-science-pack"},
                 effects = {},
                 ingredients = {
                     {"automation-science-pack", 1},
-                    {"logistic-science-pack", 1}
+                    {"logistic-science-pack", 1},
+                    {"chemical-science-pack", 1},
+                    {"production-science-pack", 1}
                 },
                 count = 800,
                 time = 30
@@ -166,7 +170,7 @@ function technologies.enable()
                     {"utility-science-pack", 1}
                 },
                 time = 60
-        })        
+        })
     end
 
     if settings.startup["rampant-industry-enableAirFiltering"].value then
