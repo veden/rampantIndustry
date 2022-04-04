@@ -43,6 +43,16 @@ data:extend({
 
         {
             type = "bool-setting",
+            name = "rampant-industry-enableGreenHouse",
+            setting_type = 'startup',
+            hidden = false,
+            default_value = true,
+            order = "a[projectile]-a[collide]",
+            per_user = false
+        },
+
+        {
+            type = "bool-setting",
             name = "rampant-industry-enableOilBurner",
             setting_type = 'startup',
             default_value = true,
@@ -127,6 +137,17 @@ data:extend({
             name = "rampant-industry-enableAdvancedAccumulator",
             setting_type = 'startup',
             default_value = true,
+            order = "a[projectile]-a[collide]",
+            per_user = false
+        },
+
+        {
+            type = "int-setting",
+            name = "rampant-industry--greenhouse-module-slots",
+            setting_type = 'startup',
+            min_value = 0,
+            max_value = 32,
+            default_value = 2,
             order = "a[projectile]-a[collide]",
             per_user = false
         },

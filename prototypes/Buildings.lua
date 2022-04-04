@@ -1,16 +1,10 @@
 local buildings = {}
 
-local recipeUtils = require("utils/RecipeUtils")
-local itemUtils = require("utils/ItemUtils")
-local powerUtils = require("utils/PowerUtils")
 local technologyUtils = require("utils/TechnologyUtils")
 local scaleUtils = require("utils/ScaleUtils")
 local oilUtils = require("utils/OilUtils")
 
 local addEffectToTech = technologyUtils.addEffectToTech
-local makeRecipe = recipeUtils.makeRecipe
-local makeOilBurner = powerUtils.makeOilBurner
-local addFuelToItem = itemUtils.addFuelToItem
 local scalePicture = scaleUtils.scalePicture
 local addFluid = oilUtils.addFluid
 
@@ -133,6 +127,296 @@ function buildings.enable()
                 lab,
                 recipe,
                 item
+        })
+    end
+
+    if settings.startup["rampant-industry-enableGreenHouse"].value then
+        data:extend({
+                {
+                    type = "corpse",
+                    name = "greenhouse-remnants-rampant-industry",
+                    icon = "__base__/graphics/icons/lab.png",
+                    icon_size = 64, icon_mipmaps = 4,
+                    flags = {"placeable-neutral", "not-on-map"},
+                    selection_box = {{-1.5, -1.5}, {1.5, 1.5}},
+                    tile_width = 3,
+                    tile_height = 3,
+                    selectable_in_game = false,
+                    subgroup = "remnants",
+                    order="d[remnants]-a[generic]-a[small]",
+                    time_before_removed = 60 * 60 * 15, -- 15 minutes
+                    final_render_layer = "remnants",
+                    remove_on_tile_placement = false,
+                    animation = make_rotated_animation_variations_from_sheet (2,
+                                                                              {
+                                                                                  filename = "__base__/graphics/entity/lab/remnants/lab-remnants.png",
+                                                                                  line_length = 1,
+                                                                                  width = 134,
+                                                                                  height = 100,
+                                                                                  frame_count = 1,
+                                                                                  variation_count = 1,
+                                                                                  axially_symmetrical = false,
+                                                                                  direction_count = 1,
+                                                                                  shift = util.by_pixel(7, 6),
+                                                                                  tint = {r=0.5,g=0.7,b=0.5},
+                                                                                  scale = 2.5,
+                                                                                  hr_version =
+                                                                                      {
+                                                                                          filename = "__base__/graphics/entity/lab/remnants/hr-lab-remnants.png",
+                                                                                          line_length = 1,
+                                                                                          width = 266,
+                                                                                          height = 196,
+                                                                                          frame_count = 1,
+                                                                                          variation_count = 1,
+                                                                                          axially_symmetrical = false,
+                                                                                          direction_count = 1,
+                                                                                          tint = {r=0.5,g=0.7,b=0.5},
+                                                                                          shift = util.by_pixel(7, 5.5),
+                                                                                          scale = 1.25
+                                                                                      },
+                    })
+                }
+        })
+
+        local greenhouse = table.deepcopy(data.raw["assembling-machine"]["assembling-machine-3"])
+        greenhouse.name = "greenhouse-rampant-industry"
+        greenhouse.minable.result = "greenhouse-rampant-industry"
+        greenhouse.collision_box[1][1] = greenhouse.collision_box[1][1] * 2.51
+        greenhouse.collision_box[1][2] = greenhouse.collision_box[1][2] * 2.51
+        greenhouse.collision_box[2][1] = greenhouse.collision_box[2][1] * 2.51
+        greenhouse.collision_box[2][2] = greenhouse.collision_box[2][2] * 2.51
+
+        greenhouse.selection_box[1][1] = greenhouse.selection_box[1][1] * 2.1
+        greenhouse.selection_box[1][2] = greenhouse.selection_box[1][2] * 2.1
+        greenhouse.selection_box[2][1] = greenhouse.selection_box[2][1] * 2.1
+        greenhouse.selection_box[2][2] = greenhouse.selection_box[2][2] * 2.1
+        greenhouse.corpse = "greenhouse-remnants-rampant-industry"
+
+        greenhouse.drawing_box = nil
+        greenhouse.scale_entity_info_icon = true
+        greenhouse.max_health = 600
+        greenhouse.energy_usage = "450KW"
+        greenhouse.energy_source.emissions_per_minute = 0
+        greenhouse.crafting_categories = {"greenhouse-rampant-industry"}
+        greenhouse.next_upgrade = nil
+        greenhouse.crafting_speed = 1
+        greenhouse.module_specification =
+            {
+                module_slots = settings.startup["rampant-industry--greenhouse-module-slots"].value,
+                module_info_icon_shift = {0, 0.9}
+            }
+        greenhouse.allowed_effects = { "speed", "productivity", "consumption", "pollution" }
+
+        local onAnimation = table.deepcopy(data.raw["lab"]["lab"].on_animation)
+        greenhouse.animation = onAnimation
+        scalePicture(1.125, greenhouse.animation)
+
+        greenhouse.fluid_boxes[1].pipe_connections[1].position[2] = -4
+        greenhouse.fluid_boxes[2] = nil
+
+        greenhouse.animation.layers[1].tint = {r=0.5,g=0.8,b=0.5}
+        greenhouse.animation.layers[1].hr_version.tint = {r=0.5,g=0.8,b=0.5}
+        greenhouse.animation.layers[2].shift = {0,1}
+        greenhouse.animation.layers[2].hr_version.shift = {0,1}
+        greenhouse.animation.layers[3].shift = {1,0}
+        greenhouse.animation.layers[3].hr_version.shift = {1,0}
+        greenhouse.animation.layers[4].shift = {2,0}
+        greenhouse.animation.layers[4].hr_version.shift = {2,0}
+
+        local recipe = table.deepcopy(data.raw["recipe"]["lab"])
+        recipe.name = "greenhouse-rampant-industry"
+        recipe.enabled = false
+        recipe.ingredients = {
+            {"iron-plate", 20},
+            {"copper-cable", 20},
+            {"electronic-circuit", 8}
+        }
+        recipe.energy_required = 15
+        recipe.result = "greenhouse-rampant-industry"
+
+        local recipeTemplate = table.deepcopy(data.raw["recipe"]["lab"])
+        recipeTemplate.enabled = false
+        recipeTemplate.category = "greenhouse-rampant-industry"
+        recipeTemplate.subgroup = "raw-material"
+        recipeTemplate.show_amount_in_title = true
+        recipeTemplate.hide_from_player_crafting = true
+        recipeTemplate.result = nil
+
+        local recipeBalanced = table.deepcopy(recipeTemplate)
+        recipeBalanced.name = "grow-balanced-rampant-industry"
+        recipeBalanced.icon = "__base__/graphics/icons/wood.png"
+        recipeBalanced.icon_size = 64
+        recipeBalanced.icon_mipmaps = 4
+        recipeBalanced.ingredients = {
+            {type="item", name="seed-rampant-industry", amount=10},
+            {type="fluid", name="water", amount=4000}
+        }
+        recipeBalanced.energy_required = 180
+        recipeBalanced.results = {
+            {type="item", name="wood", amount_min=15, amount_max=50},
+            {type="item", name="seed-rampant-industry", amount_min=0, amount_max=15}
+        }
+        recipeBalanced.main_product = ""
+        recipeBalanced.order = "a"
+
+        local recipeGrow = table.deepcopy(recipeTemplate)
+        recipeGrow.name = "grow-tree-rampant-industry"
+        recipeGrow.icon = "__RampantIndustry__/graphics/icons/recipe-grow.png"
+        recipeGrow.icon_size = 64
+        recipeGrow.icon_mipmaps = 1
+        recipeGrow.ingredients = {
+            {type="item", name="seed-rampant-industry", amount=15},
+            {type="fluid", name="water", amount=6000}
+        }
+        recipeGrow.energy_required = 180
+        recipeGrow.results = {
+            {type="item", name="wood", amount_min=50, amount_max=70},
+            {type="item", name="seed-rampant-industry", amount_min=0, amount_max=7}
+        }
+        recipeGrow.main_product = ""
+        recipeGrow.order = "b"
+
+        local recipeHarvest = table.deepcopy(recipeTemplate)
+        recipeHarvest.name = "grow-harvest-rampant-industry"
+        recipeHarvest.icon = "__RampantIndustry__/graphics/icons/recipe-harvest.png"
+        recipeHarvest.icon_size = 64
+        recipeHarvest.icon_mipmaps = 1
+        recipeHarvest.ingredients = {
+            {type="item", name="wood", amount=20},
+            {type="fluid", name="water", amount=5000}
+        }
+        recipeHarvest.energy_required = 180
+        recipeHarvest.results = {
+            {type="item", name="seed-rampant-industry", amount_min=5, amount_max=30},
+            {type="item", name="wood", amount_min=0, amount_max=20}
+        }
+        recipeHarvest.main_product = ""
+        recipeHarvest.order = "c"
+
+        local recipeBalanced2 = table.deepcopy(recipeTemplate)
+        recipeBalanced2.name = "grow-balanced-2-rampant-industry"
+        recipeBalanced2.icon = "__RampantIndustry__/graphics/icons/recipe-balanced-2.png"
+        recipeBalanced2.icon_size = 64
+        recipeBalanced2.icon_mipmaps = 1
+        recipeBalanced2.ingredients = {
+            {type="item", name="seed-rampant-industry", amount=15},
+            {type="fluid", name="water", amount=8000},
+            {type="item", name="sulfur", amount=6},
+            {type="item", name="stone", amount=6}
+        }
+        recipeBalanced2.energy_required = 180
+        recipeBalanced2.results = {
+            {type="item", name="wood", amount_min=50, amount_max=70},
+            {type="item", name="seed-rampant-industry", amount_min=10, amount_max=30}
+        }
+        recipeBalanced2.main_product = ""
+        recipeBalanced2.order = "ab"
+
+        local recipeGrow2 = table.deepcopy(recipeTemplate)
+        recipeGrow2.name = "grow-tree-2-rampant-industry"
+        recipeGrow2.icon = "__RampantIndustry__/graphics/icons/recipe-grow-2.png"
+        recipeGrow2.icon_size = 64
+        recipeGrow2.icon_mipmaps = 1
+        recipeGrow2.ingredients = {
+            {type="item", name="seed-rampant-industry", amount=15},
+            {type="fluid", name="water", amount=10000},
+            {type="item", name="sulfur", amount=8},
+            {type="item", name="stone", amount=4}
+        }
+        recipeGrow2.energy_required = 180
+        recipeGrow2.results = {
+            {type="item", name="wood", amount_min=70, amount_max=120},
+            {type="item", name="seed-rampant-industry", amount_min=0, amount_max=15}
+        }
+        recipeGrow2.main_product = ""
+        recipeGrow2.order = "ba"
+
+        local recipeHarvest2 = table.deepcopy(recipeTemplate)
+        recipeHarvest2.name = "grow-harvest-2-rampant-industry"
+        recipeHarvest2.icon = "__RampantIndustry__/graphics/icons/recipe-harvest-2.png"
+        recipeHarvest2.icon_size = 64
+        recipeHarvest2.icon_mipmaps = 1
+        recipeHarvest2.ingredients = {
+            {type="item", name="wood", amount=30},
+            {type="fluid", name="water", amount=9000},
+            {type="item", name="sulfur", amount=8},
+            {type="item", name="stone", amount=8}
+        }
+        recipeHarvest2.energy_required = 180
+        recipeHarvest2.results = {
+            {type="item", name="seed-rampant-industry", amount_min=15, amount_max=50},
+            {type="item", name="wood", amount_min=10, amount_max=30}
+        }
+        recipeHarvest2.main_product = ""
+        recipeHarvest2.order = "ca"
+
+        local item = table.deepcopy(data.raw["item"]["lab"])
+        item.name = "greenhouse-rampant-industry"
+        item.icons = {{icon = item.icon, tint={r=0.5,g=0.8,b=0.5,a=1}}}
+        item.icon = nil
+        item.place_result = "greenhouse-rampant-industry"
+        item.order = "g[zzlab]"
+
+        local itemSeed = table.deepcopy(data.raw["item"]["wood"])
+        itemSeed.name = "seed-rampant-industry"
+        itemSeed.fuel_value = "1KJ"
+        itemSeed.icon = "__RampantIndustry__/graphics/icons/recipe-harvest.png"
+        itemSeed.icon_size = 64
+        itemSeed.icon_mipmaps = 1
+
+
+        addEffectToTech("greenhouse",
+                        {
+                            type = "unlock-recipe",
+                            recipe = recipe.name
+        })
+        addEffectToTech("greenhouse",
+                        {
+                            type = "unlock-recipe",
+                            recipe = recipeHarvest.name
+        })
+        addEffectToTech("greenhouse",
+                        {
+                            type = "unlock-recipe",
+                            recipe = recipeGrow.name
+        })
+        addEffectToTech("greenhouse",
+                        {
+                            type = "unlock-recipe",
+                            recipe = recipeBalanced.name
+        })
+
+        addEffectToTech("greenhouse-2",
+                        {
+                            type = "unlock-recipe",
+                            recipe = recipeHarvest2.name
+        })
+        addEffectToTech("greenhouse-2",
+                        {
+                            type = "unlock-recipe",
+                            recipe = recipeGrow2.name
+        })
+        addEffectToTech("greenhouse-2",
+                        {
+                            type = "unlock-recipe",
+                            recipe = recipeBalanced2.name
+        })
+
+        data:extend({
+                {
+                    type = "recipe-category",
+                    name = "greenhouse-rampant-industry"
+                },
+                greenhouse,
+                item,
+                itemSeed,
+                recipe,
+                recipeGrow,
+                recipeGrow2,
+                recipeHarvest,
+                recipeHarvest2,
+                recipeBalanced,
+                recipeBalanced2
         })
     end
 
@@ -1161,7 +1445,7 @@ function buildings.enable()
                 module_slots = settings.startup["rampant-industry--advanced-refinery-module-slots"].value,
                 module_info_icon_shift = {0, 0.9}
             }
-        
+
         refinery.fluid_boxes =  {
             {
                 production_type = "input",
@@ -1367,7 +1651,7 @@ function buildings.enable()
                 module_info_icon_shift = {0, 0.9}
             }
 
-        
+
         local item = table.deepcopy(data.raw["item"]["assembling-machine-3"])
         item.name = "advanced-assembler-rampant-industry"
         item.icon = nil
@@ -1466,7 +1750,7 @@ function buildings.enable()
                 module_slots = settings.startup["rampant-industry--advanced-electric-furnace-module-slots"].value,
                 module_info_icon_shift = {0, 0.9}
             }
-        
+
         electricFurnace.energy_usage = "2511kW"
 
         local item = table.deepcopy(data.raw["item"]["electric-furnace"])
@@ -1607,7 +1891,7 @@ function buildings.enable()
                 module_info_icon_shift = {0, 0.9}
             }
 
-        
+
         assembler.fluid_boxes = {
             {
                 production_type = "input",

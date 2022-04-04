@@ -23,6 +23,48 @@ function technologies.enable()
         })
     end
 
+    if settings.startup["rampant-industry-enableGreenHouse"].value then
+        local greenhouse = makeTechnology({
+                name="greenhouse",
+                icons={
+                    {
+                        icon="__RampantIndustry__/graphics/technology/advanced-lab.png",
+                        tint={r=0.5,g=0.8,b=0.5},
+                        icon_mipmaps=4,
+                        icon_size=128
+                    }
+                },
+                prerequisites = {},
+                effects = {},
+                ingredients = {
+                    {"automation-science-pack", 1}
+                },
+                count = 800,
+                time = 30
+        })
+
+        makeTechnology({
+                name="greenhouse-2",
+                icons={
+                    {
+                        icon="__RampantIndustry__/graphics/technology/advanced-lab.png",
+                        tint={r=0.5,g=0.8,b=0.5},
+                        icon_mipmaps=4,
+                        icon_size=128
+                    }
+                },
+                prerequisites = {"chemical-science-pack", greenhouse},
+                effects = {},
+                ingredients = {
+                    {"automation-science-pack", 1},
+                    {"logistic-science-pack", 1},
+                    {"chemical-science-pack", 1}
+                },
+                count = 800,
+                time = 30
+        })
+    end
+
     if settings.startup["rampant-industry-enableLargeStorageTank"].value then
         makeTechnology({
                 name="large-storage-tank-2",
