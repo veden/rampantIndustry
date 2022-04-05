@@ -18,7 +18,7 @@ data:extend({
             name = "rampant-industry--enableFuelEmissions",
             setting_type = 'startup',
             default_value = true,
-            order = "a[projectile]-a[collide]",
+            order = "a[projectile]-b[collide]",
             per_user = false
         },
 
@@ -46,7 +46,7 @@ data:extend({
             name = "rampant-industry-enableGreenHouse",
             setting_type = 'startup',
             hidden = false,
-            default_value = true,
+            default_value = false,
             order = "a[projectile]-a[collide]",
             per_user = false
         },

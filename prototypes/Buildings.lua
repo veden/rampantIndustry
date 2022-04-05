@@ -205,7 +205,7 @@ function buildings.enable()
                 module_slots = settings.startup["rampant-industry--greenhouse-module-slots"].value,
                 module_info_icon_shift = {0, 0.9}
             }
-        greenhouse.allowed_effects = { "speed", "productivity", "consumption", "pollution" }
+        greenhouse.allowed_effects = { "speed", "consumption" }
 
         local onAnimation = table.deepcopy(data.raw["lab"]["lab"].on_animation)
         greenhouse.animation = onAnimation
@@ -237,7 +237,7 @@ function buildings.enable()
         local recipeTemplate = table.deepcopy(data.raw["recipe"]["lab"])
         recipeTemplate.enabled = false
         recipeTemplate.category = "greenhouse-rampant-industry"
-        recipeTemplate.subgroup = "raw-material"
+        recipeTemplate.subgroup = "intermediate-product"
         recipeTemplate.show_amount_in_title = true
         recipeTemplate.hide_from_player_crafting = true
         recipeTemplate.result = nil
@@ -248,13 +248,13 @@ function buildings.enable()
         recipeBalanced.icon_size = 64
         recipeBalanced.icon_mipmaps = 4
         recipeBalanced.ingredients = {
-            {type="item", name="seed-rampant-industry", amount=10},
-            {type="fluid", name="water", amount=4000}
+            {type="item", name="seed-rampant-industry", amount=2},
+            {type="fluid", name="water", amount=7500}
         }
-        recipeBalanced.energy_required = 180
+        recipeBalanced.energy_required = 22
         recipeBalanced.results = {
-            {type="item", name="wood", amount_min=15, amount_max=50},
-            {type="item", name="seed-rampant-industry", amount_min=0, amount_max=15}
+            {type="item", name="wood", amount_min=2, amount_max=6},
+            {type="item", name="seed-rampant-industry", amount_min=0, amount_max=2}
         }
         recipeBalanced.main_product = ""
         recipeBalanced.order = "a"
@@ -265,13 +265,13 @@ function buildings.enable()
         recipeGrow.icon_size = 64
         recipeGrow.icon_mipmaps = 1
         recipeGrow.ingredients = {
-            {type="item", name="seed-rampant-industry", amount=15},
-            {type="fluid", name="water", amount=6000}
+            {type="item", name="seed-rampant-industry", amount=3},
+            {type="fluid", name="water", amount=9000}
         }
-        recipeGrow.energy_required = 180
+        recipeGrow.energy_required = 22
         recipeGrow.results = {
-            {type="item", name="wood", amount_min=50, amount_max=70},
-            {type="item", name="seed-rampant-industry", amount_min=0, amount_max=7}
+            {type="item", name="wood", amount_min=4, amount_max=12},
+            {type="item", name="seed-rampant-industry", amount_min=0, amount_max=1}
         }
         recipeGrow.main_product = ""
         recipeGrow.order = "b"
@@ -282,13 +282,13 @@ function buildings.enable()
         recipeHarvest.icon_size = 64
         recipeHarvest.icon_mipmaps = 1
         recipeHarvest.ingredients = {
-            {type="item", name="wood", amount=20},
-            {type="fluid", name="water", amount=5000}
+            {type="item", name="wood", amount=3},
+            {type="fluid", name="water", amount=8250}
         }
-        recipeHarvest.energy_required = 180
+        recipeHarvest.energy_required = 22
         recipeHarvest.results = {
-            {type="item", name="seed-rampant-industry", amount_min=5, amount_max=30},
-            {type="item", name="wood", amount_min=0, amount_max=20}
+            {type="item", name="seed-rampant-industry", amount_min=2, amount_max=5},
+            {type="item", name="wood", amount_min=0, amount_max=2}
         }
         recipeHarvest.main_product = ""
         recipeHarvest.order = "c"
@@ -299,15 +299,14 @@ function buildings.enable()
         recipeBalanced2.icon_size = 64
         recipeBalanced2.icon_mipmaps = 1
         recipeBalanced2.ingredients = {
-            {type="item", name="seed-rampant-industry", amount=15},
-            {type="fluid", name="water", amount=8000},
-            {type="item", name="sulfur", amount=6},
-            {type="item", name="stone", amount=6}
+            {type="item", name="seed-rampant-industry", amount=3},
+            {type="fluid", name="water", amount=10000},
+            {type="item", name="sulfur", amount=1}
         }
-        recipeBalanced2.energy_required = 180
+        recipeBalanced2.energy_required = 22
         recipeBalanced2.results = {
-            {type="item", name="wood", amount_min=50, amount_max=70},
-            {type="item", name="seed-rampant-industry", amount_min=10, amount_max=30}
+            {type="item", name="wood", amount_min=5, amount_max=14},
+            {type="item", name="seed-rampant-industry", amount_min=1, amount_max=3}
         }
         recipeBalanced2.main_product = ""
         recipeBalanced2.order = "ab"
@@ -318,15 +317,14 @@ function buildings.enable()
         recipeGrow2.icon_size = 64
         recipeGrow2.icon_mipmaps = 1
         recipeGrow2.ingredients = {
-            {type="item", name="seed-rampant-industry", amount=15},
-            {type="fluid", name="water", amount=10000},
-            {type="item", name="sulfur", amount=8},
-            {type="item", name="stone", amount=4}
+            {type="item", name="seed-rampant-industry", amount=4},
+            {type="fluid", name="water", amount=12500},
+            {type="item", name="sulfur", amount=1}
         }
-        recipeGrow2.energy_required = 180
+        recipeGrow2.energy_required = 22
         recipeGrow2.results = {
-            {type="item", name="wood", amount_min=70, amount_max=120},
-            {type="item", name="seed-rampant-industry", amount_min=0, amount_max=15}
+            {type="item", name="wood", amount_min=7, amount_max=19},
+            {type="item", name="seed-rampant-industry", amount_min=0, amount_max=1}
         }
         recipeGrow2.main_product = ""
         recipeGrow2.order = "ba"
@@ -337,15 +335,14 @@ function buildings.enable()
         recipeHarvest2.icon_size = 64
         recipeHarvest2.icon_mipmaps = 1
         recipeHarvest2.ingredients = {
-            {type="item", name="wood", amount=30},
-            {type="fluid", name="water", amount=9000},
-            {type="item", name="sulfur", amount=8},
-            {type="item", name="stone", amount=8}
+            {type="item", name="wood", amount=4},
+            {type="fluid", name="water", amount=11000},
+            {type="item", name="sulfur", amount=1}
         }
-        recipeHarvest2.energy_required = 180
+        recipeHarvest2.energy_required = 22
         recipeHarvest2.results = {
-            {type="item", name="seed-rampant-industry", amount_min=15, amount_max=50},
-            {type="item", name="wood", amount_min=10, amount_max=30}
+            {type="item", name="seed-rampant-industry", amount_min=5, amount_max=9},
+            {type="item", name="wood", amount_min=2, amount_max=5}
         }
         recipeHarvest2.main_product = ""
         recipeHarvest2.order = "ca"
@@ -360,6 +357,7 @@ function buildings.enable()
         local itemSeed = table.deepcopy(data.raw["item"]["wood"])
         itemSeed.name = "seed-rampant-industry"
         itemSeed.fuel_value = "1KJ"
+        itemSeed.subgroup = "intermediate-product"
         itemSeed.icon = "__RampantIndustry__/graphics/icons/recipe-harvest.png"
         itemSeed.icon_size = 64
         itemSeed.icon_mipmaps = 1
