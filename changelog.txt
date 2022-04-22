@@ -5,6 +5,7 @@ Date: 05. 09. 2021
     - Reduced air filter pollution injection in air filter by 60x
     - Added chemical and production science pack to advanced lab and large storage tank
     - Changed lower bound of module slots to 0
+    - Changed license to GPLv3
 
 ---------------------------------------------------------------------------------------------------
 Version: 1.1.0
