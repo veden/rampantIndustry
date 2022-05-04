@@ -712,6 +712,9 @@ function buildings.enable()
         airFilter.fixed_recipe = "air-filter-pollution-rampant-industry"
         airFilter.crafting_categories = { "air-filter-rampant-industry" }
         airFilter.minable = {mining_time=2,result="air-filter-rampant-industry"}
+        airFilter.icon = "__RampantIndustry__/graphics/icons/air-filter.png"
+        airFilter.icon_size = 64
+        airFilter.icon_mipmaps = 1
         airFilter.next_upgrade = nil
         airFilter.energy_usage = "750KW"
         airFilter.energy_source.drain = "500KW"
@@ -864,6 +867,12 @@ function buildings.enable()
         airFilter2.fixed_recipe = "air-filter-2-pollution-rampant-industry"
         airFilter2.crafting_categories = { "air-filter-rampant-industry" }
         airFilter2.minable = {mining_time=2,result="air-filter-2-rampant-industry"}
+        airFilter2.icon = nil
+        airFilter2.icons = {
+            {icon = "__RampantIndustry__/graphics/icons/air-filter.png", tint = {0.8,0.8,1,1}}
+        }
+        airFilter2.icon_size = 64
+        airFilter2.icon_mipmaps = 1
         airFilter2.next_upgrade = nil
         airFilter2.max_health = airFilter2.max_health * 2
         airFilter2.energy_usage = "2250KW"
@@ -1051,11 +1060,11 @@ function buildings.enable()
         recipe2.icon_size = 64
         recipe2.icon_mipmaps = 1
         recipe2.ingredients = {
-            {"steel-plate", 25},
+            {"steel-plate", 5},
             {"advanced-circuit", 20},
             {"steam-turbine", 1},
-            {"chemical-plant", 2},
-            {"pump", 1}
+            {"chemical-plant", 1},
+            {"air-filter-rampant-industry", 1}
         }
         recipe2.energy_required = 30
         recipe2.hidden = false
