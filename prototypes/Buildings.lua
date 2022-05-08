@@ -722,6 +722,7 @@ function buildings.enable()
         airFilter.match_volume_to_activity = true
         airFilter.crafting_speed = 1
         airFilter.module_specification.module_slots = 0
+        airFilter.show_recipe_icon = false
         airFilter.fast_replaceable_group = nil
         airFilter.default_recipe_tint = {
             primary = {r=0,g=1,b=1,a=1},
@@ -881,6 +882,7 @@ function buildings.enable()
         airFilter2.match_volume_to_activity = true
         airFilter2.crafting_speed = 1
         airFilter2.module_specification.module_slots = 0
+        airFilter2.show_recipe_icon = false
         airFilter2.fast_replaceable_group = nil
         airFilter2.animation = {
             layers =
