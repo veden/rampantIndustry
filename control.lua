@@ -46,6 +46,7 @@ local mFloor = math.floor
 -- local references
 
 local world
+local minDiffuse
 
 -- module code
 
@@ -67,6 +68,7 @@ end
 
 local function onConfigChanged()
     onModSettingsChange()
+    minDiffuse = game.map_settings.pollution.min_to_diffuse
     if not world.version then
         world.airFilterTick = nil
         world.position = {x=0,y=0}
@@ -108,6 +110,7 @@ local function onInit()
     global.world = {}
 
     world = global.world
+    minDiffuse = game.map_settings.pollution.min_to_diffuse
 
     onConfigChanged()
 end
@@ -163,7 +166,15 @@ local function onAirFiltering()
             if (entity.is_connected_to_electric_network() and
                 ((entity.energy / entity.prototype.max_energy_usage) > 0.65)) then
                 local amount = entity.surface.get_pollution(entity.position)
-                if (amount > 0) then
+                if not minDiffuse then
+                    minDiffuse = game.map_settings.pollution.min_to_diffuse
+                end
+                if (not entity.active) and (amount > minDiffuse * 0.75) then
+                    entity.active = true
+                end
+                if (amount < minDiffuse * 0.25) and entity.active then
+                    entity.active = false
+                elseif (amount > 0) then
                     world.insertFluidQuery.amount = amount * 0.05
                     entity.insert_fluid(world.insertFluidQuery)
                 end
