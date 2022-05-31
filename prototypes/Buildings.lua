@@ -716,7 +716,7 @@ function buildings.enable()
         airFilter.icon_size = 64
         airFilter.icon_mipmaps = 1
         airFilter.next_upgrade = nil
-        airFilter.energy_usage = "750KW"
+        airFilter.energy_usage = "1200KW"
         airFilter.energy_source.drain = "50KW"
         airFilter.match_speed_to_activity = true
         airFilter.match_volume_to_activity = true
@@ -876,7 +876,7 @@ function buildings.enable()
         airFilter2.icon_mipmaps = 1
         airFilter2.next_upgrade = nil
         airFilter2.max_health = airFilter2.max_health * 2
-        airFilter2.energy_usage = "2250KW"
+        airFilter2.energy_usage = "3350KW"
         airFilter2.energy_source.drain = "150KW"
         airFilter2.match_speed_to_activity = true
         airFilter2.match_volume_to_activity = true
