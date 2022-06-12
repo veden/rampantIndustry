@@ -6,6 +6,7 @@ Version: 1.3.0
     - Changed air filter sound to be the steam turbine sound instead of an assembling machine
     - Modified logic around deactivating air filter entity to work with Rampant Maintenance
     - Removed pollution fluid in favor of deactivating and activating air filter entity based on pollution on chunk
+    - onModSettingsChange all air filter entity activeness is synced with mod state
 
 ---------------------------------------------------------------------------------------------------
 Version: 1.2.0

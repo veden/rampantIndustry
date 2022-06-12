@@ -15,33 +15,8 @@
 
 -- imports
 
--- local constants = require("libs/Constants")
-local mathUtils = require("libs/MathUtils")
-
 -- constants
-
--- local DEFAULT_SPOUT_SIZE = constants.DEFAULT_SPOUT_SIZE
-
--- local RAW_GOO_TYPES = constants.RAW_GOO_TYPES
--- local RAMPANT_PREFIX_TABLE = constants.RAMPANT_PREFIX_TABLE
--- local DEFAULT_GOO_TYPE = constants.DEFAULT_GOO_TYPE
-
--- local ENABLE_NORMAL_GOO = constants.ENABLE_NORMAL_GOO
--- local ENABLE_ALL_GOO = constants.ENABLE_ALL_GOO
--- local MENDING_WALL_COOLDOWN = constants.MENDING_WALL_COOLDOWN
-
--- local CHUNK_SIZE = constants.CHUNK_SIZE
--- local CHUNK_SIZE_DIVIDER = constants.CHUNK_SIZE_DIVIDER
-
--- imported functions
-
--- local gaussianRandomRange = mathUtils.gaussianRandomRange
-
--- local strFind = string.find
--- local substr = string.sub
--- local mRandom = math.random
 local mFloor = math.floor
--- local mCeil = math.ceil
 
 -- local references
 
@@ -51,22 +26,23 @@ local world
 
 local function onModSettingsChange(event)
 
-    if event and (string.sub(event.setting, 1, 18) ~= "rampant-industry") then
-        return false
+    for i=1,world.airFilter.len do
+        local entityActivePair = world.airFilter[i]
+        if entityActivePair[1].valid then
+            entityActivePair[1].active = true
+            entityActivePair[2] = true
+        end
     end
 
-    -- world.airFilterCooldown = settings.global["rampant-industry-airFilterCooldown"].value
-
-    -- world.spoutThreshold = settings.global["rampant-industry-spoutThreshold"].value
-    -- world.spoutScaler = settings.global["rampant-industry-spoutScaler"].value
-    -- world.spoutDefaultValue = world.spoutScaler * DEFAULT_SPOUT_SIZE
+    if event and (string.sub(event.setting, 1, #"rampant-industry") ~= "rampant-industry") then
+        return false
+    end
 
     return true
 end
 
 
 local function onConfigChanged()
-    onModSettingsChange()
     if not world.version then
         world.airFilterTick = nil
         world.position = {x=0,y=0}
@@ -104,13 +80,10 @@ local function onConfigChanged()
         world.minDiffuseActivate = minDiffuse * 0.75
 
         for i=1,world.airFilter.len do
-            local entity = world.airFilter[i]
             world.airFilter[i] = {world.airFilter[i],true}
-            if entity.valid and not entity.active then
-                entity.active = true
-            end
         end
     end
+    onModSettingsChange()
 end
 
 local function onInit()
@@ -123,35 +96,6 @@ end
 
 local function onLoad()
     world = global.world
-end
-
-local function onDeath(event)
-    -- local entity = event.entity
-    -- if (event.cause and event.cause.force.name == "player") and (entity.force.name == "enemy") then
-    --     if (mRandom() < world.spoutThreshold) then
-    --         if (entity.type == "unit-spawner") then
-    --             local name = entity.name
-    --             local gooType
-    --             if ENABLE_ALL_GOO then
-    --                 if (substr(name, -7) == "rampant") then
-    --                     local prefix = (strFind(name,"-")) - 1
-    --                     gooType = RAMPANT_PREFIX_TABLE[(substr(name,1,prefix))]
-    --                 else
-    --                     gooType = RAW_GOO_TYPES[mRandom(#RAW_GOO_TYPES)]
-    --                 end
-    --             elseif ENABLE_NORMAL_GOO then
-    --                 gooType = DEFAULT_GOO_TYPE
-    --             end
-    --             local position = entity.position
-    --             local x = position.x
-    --             local y = position.y
-    --             local potentialYield = (((x * x) + (y * y)) ^ 0.5) * world.spoutDefaultValue
-
-    --             local yield = gaussianRandomRange(potentialYield, 0.15, potentialYield * 0.7, potentialYield * 1.3)
-    --             entity.surface.create_entity({name=gooType, amount=yield, position=entity.position})
-    --         end
-    --     end
-    -- end
 end
 
 local function onBuilding(event)
