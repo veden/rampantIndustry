@@ -46,7 +46,6 @@ local mFloor = math.floor
 -- local references
 
 local world
-local minDiffuse
 
 -- module code
 
@@ -68,7 +67,6 @@ end
 
 local function onConfigChanged()
     onModSettingsChange()
-    minDiffuse = game.map_settings.pollution.min_to_diffuse
     if not world.version then
         world.airFilterTick = nil
         world.position = {x=0,y=0}
@@ -94,15 +92,24 @@ local function onConfigChanged()
             end
         end
 
-        world.insertFluidQuery = {
-            name="pollution-fluid-rampant-industry",
-            amount=10
-        }
-
-        for _,p in ipairs(game.connected_players) do
-            p.print("Rampant Industry - Version 1.1.0")
-        end
         world.version = 1
+    end
+    if world.version < 2 then
+        world.version = 2
+
+        game.print("Rampant Industry - Version 1.3.0")
+
+        local minDiffuse = game.map_settings.pollution.min_to_diffuse
+        world.minDiffuseDeactivate = minDiffuse * 0.25
+        world.minDiffuseActivate = minDiffuse * 0.75
+
+        for i=1,world.airFilter.len do
+            local entity = world.airFilter[i]
+            world.airFilter[i] = {world.airFilter[i],true}
+            if entity.valid and not entity.active then
+                entity.active = true
+            end
+        end
     end
 end
 
@@ -110,7 +117,6 @@ local function onInit()
     global.world = {}
 
     world = global.world
-    minDiffuse = game.map_settings.pollution.min_to_diffuse
 
     onConfigChanged()
 end
@@ -154,33 +160,33 @@ local function onBuilding(event)
         (entity.name == "air-filter-rampant-industry") or
         (entity.name == "air-filter-2-rampant-industry") then
         local n = world.airFilter.len + 1
-        world.airFilter[n] = entity
+        world.airFilter[n] = {entity,true}
         world.airFilter.len = n
     end
 end
 
 local function onAirFiltering()
     if (world.airFilterCursor <= world.airFilter.len) then
-        local entity = world.airFilter[world.airFilterCursor]
+        local entityActivePair = world.airFilter[world.airFilterCursor]
+        local entity = entityActivePair[1]
         if entity.valid then
-            if (entity.is_connected_to_electric_network() and
-                ((entity.energy / entity.prototype.max_energy_usage) > 0.65)) then
-                local amount = entity.surface.get_pollution(entity.position)
-                if not minDiffuse then
-                    minDiffuse = game.map_settings.pollution.min_to_diffuse
-                end
-                if (not entity.active) and (amount > minDiffuse * 0.75) then
-                    entity.active = true
-                end
-                if (amount < minDiffuse * 0.25) and entity.active then
+            local amount = entity.surface.get_pollution(entity.position)
+            if (amount < world.minDiffuseDeactivate) then
+                if entity.active and entityActivePair[2] then
                     entity.active = false
-                elseif (amount > 0) then
-                    world.insertFluidQuery.amount = amount * 0.05
-                    entity.insert_fluid(world.insertFluidQuery)
+                    entityActivePair[2] = false
+                end
+            else
+                if not entity.active
+                    and not entityActivePair[2]
+                    and (amount > world.minDiffuseActivate)
+                then
+                    entity.active = true
+                    entityActivePair[2] = true
                 end
             end
             local n = world.airFilterFill + 1
-            world.airFilter[n] = entity
+            world.airFilter[n] = entityActivePair
             world.airFilterFill = n
         end
         world.airFilterCursor = world.airFilterCursor + 1
@@ -252,9 +258,6 @@ script.on_nth_tick(15, removePlayerSelection)
 script.on_event(defines.events.on_tick, onAirFiltering)
 
 script.on_event(defines.events.on_selected_entity_changed, onSelectionChanged)
-
--- script.on_event(defines.events.on_entity_died, onRemoval)
--- script.on_event({defines.events.script_raised_destroy}, onRemoval)
 
 script.on_event(defines.events.on_built_entity, onBuilding, {
                     {

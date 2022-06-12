@@ -1,4 +1,13 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.3.0
+  Contributions:
+    - garrotte13 fixed airfilter icons and modified advanced air filter entity recipe to include air filter entity. Removed air filter recipe on running air filter building as there was only one recipe. Reduced airFilter idle energy drain by 10x. Added logic to disable air filter entity on low pollution to save air filters in entity. Increased working energy cost by ~34%.
+  Tweaks:
+    - Changed air filter sound to be the steam turbine sound instead of an assembling machine
+    - Modified logic around deactivating air filter entity to work with Rampant Maintenance
+    - Removed pollution fluid in favor of deactivating and activating air filter entity based on pollution on chunk
+
+---------------------------------------------------------------------------------------------------
 Version: 1.2.0
 Date: 05. 09. 2021
   Tweaks:

@@ -826,7 +826,19 @@ function buildings.enable()
                 },
                 secondary_draw_orders = { north = -1 }
             },
-            off_when_no_fluid_recipe = false
+            off_when_no_fluid_recipe = true
+        }
+        airFilter.working_sound = {
+            sound =
+                {
+                    filename = "__base__/sound/steam-turbine.ogg",
+                    volume = 0.55
+                },
+            match_speed_to_activity = true,
+            audible_distance_modifier = 0.7,
+            max_sounds_per_type = 3,
+            fade_in_ticks = 4,
+            fade_out_ticks = 20
         }
 
         airFilter.fluid_boxes[2].pipe_picture.east = {
@@ -991,7 +1003,7 @@ function buildings.enable()
                 },
                 secondary_draw_orders = { north = -1 }
             },
-            off_when_no_fluid_recipe = false
+            off_when_no_fluid_recipe = true
         }
 
         airFilter2.fluid_boxes[2].pipe_picture.east = {
@@ -1034,6 +1046,18 @@ function buildings.enable()
         airFilter2.fluid_boxes[4].pipe_picture.west = airFilter2.fluid_boxes[2].pipe_picture.west
 
         airFilter2.idle_animation =  airFilter2.animation
+        airFilter2.working_sound = {
+            sound =
+                {
+                    filename = "__base__/sound/steam-turbine.ogg",
+                    volume = 0.77
+                },
+            match_speed_to_activity = true,
+            audible_distance_modifier = 0.7,
+            max_sounds_per_type = 3,
+            fade_in_ticks = 4,
+            fade_out_ticks = 20
+        }
 
 
         local recipe = table.deepcopy(data.raw["recipe"]["assembling-machine-1"])
@@ -1096,7 +1120,6 @@ function buildings.enable()
         recipePollution.category = "air-filter-rampant-industry"
         recipePollution.subgroup = "raw-material"
         recipePollution.normal.ingredients = {
-            {type="fluid",name="pollution-fluid-rampant-industry", amount=20},
             {name="clean-air-filter-rampant-industry", amount=2}
         }
         recipePollution.normal.energy_required = 90
@@ -1108,7 +1131,6 @@ function buildings.enable()
         recipePollution.normal.always_show_products = true
         recipePollution.normal.show_amount_in_title = false
         recipePollution.normal.result = nil
-        -- recipePollution.normal.main_product = "compressed-pollution-fluid-rampant-industry"
         recipePollution.normal.results = {
             {name="dirty-air-filter-rampant-industry", amount=2}
         }
@@ -1118,7 +1140,6 @@ function buildings.enable()
         recipePollution2.category = "air-filter-rampant-industry"
         recipePollution2.subgroup = "raw-material"
         recipePollution2.normal.ingredients = {
-            {type="fluid",name="pollution-fluid-rampant-industry", amount=60},
             {name="clean-air-filter-rampant-industry", amount=6}
         }
         recipePollution2.normal.energy_required = 90
@@ -1130,7 +1151,6 @@ function buildings.enable()
         recipePollution2.normal.always_show_products = true
         recipePollution2.normal.show_amount_in_title = false
         recipePollution2.normal.result = nil
-        -- recipePollution2.normal.main_product = "compressed-pollution-fluid-rampant-industry"
         recipePollution2.normal.results = {
             {name="dirty-air-filter-rampant-industry", amount=6}
         }
@@ -1148,12 +1168,10 @@ function buildings.enable()
         recipeAirFilter.normal.hide_from_player_crafting = true
         recipeAirFilter.normal.hidden = false
         recipeAirFilter.normal.enabled = false
-        -- recipeAirFilter.normal.emissions_multiplier = -3
         recipeAirFilter.normal.allow_as_intermediate = false
         recipeAirFilter.normal.always_show_products = true
         recipeAirFilter.normal.show_amount_in_title = false
         recipeAirFilter.normal.result = nil
-        -- recipeAirFilter.normal.main_product = "compressed-pollution-fluid-rampant-industry"
         recipeAirFilter.normal.results = {
             {name="clean-air-filter-rampant-industry", amount=1}
         }
@@ -1173,35 +1191,17 @@ function buildings.enable()
         recipeCleanAirFilter.normal.hide_from_player_crafting = true
         recipeCleanAirFilter.normal.hidden = false
         recipeCleanAirFilter.normal.enabled = false
-        -- recipeCleanAirFilter.normal.emissions_multiplier = -3
         recipeCleanAirFilter.normal.allow_as_intermediate = false
         recipeCleanAirFilter.normal.always_show_products = true
         recipeCleanAirFilter.normal.show_amount_in_title = false
         recipeCleanAirFilter.normal.result = nil
-        -- recipeCleanAirFilter.normal.main_product = "compressed-pollution-fluid-rampant-industry"
         recipeCleanAirFilter.normal.results = {
             {name="clean-air-filter-rampant-industry", amount=1, probability = 0.95},
             {name="coal", amount=10},
             {type="fluid", name="water", amount=15}
         }
 
-        addFluid({
-                name="pollution",
-                icons={{icon="__base__/graphics/icons/fluid/steam.png",
-                        icon_size = 64,
-                        icon_mipmaps = 4,
-                        tint = {r=0.5, g=0.5, b=0.5, a=1}}},
-                disableAutoBarrel = true
-        })
-
-        addFluid({
-                name="compressed-pollution",
-                iconSize = 64,
-                iconMipmaps = 4,
-                tint = {r=0.5, g=0.5, b=0.5, a=1}
-        })
-
-        cleanAirFilter = {
+        local cleanAirFilter = {
             type = "item",
             name = "clean-air-filter-rampant-industry",
             icon = "__RampantIndustry__/graphics/icons/clean-air-filter.png",
@@ -1211,7 +1211,7 @@ function buildings.enable()
             stack_size = 100
         }
 
-        dirtyAirFilter = {
+        local dirtyAirFilter = {
             type = "item",
             name = "dirty-air-filter-rampant-industry",
             icon = "__RampantIndustry__/graphics/icons/dirty-air-filter.png",
