@@ -74,10 +74,10 @@ function buildings.enable()
         local lab = table.deepcopy(data.raw["lab"]["lab"])
         lab.name = "advanced-lab-rampant-industry"
         lab.minable.result = "advanced-lab-rampant-industry"
-        lab.collision_box[1][1] = lab.collision_box[1][1] * 4
-        lab.collision_box[1][2] = lab.collision_box[1][2] * 4
-        lab.collision_box[2][1] = lab.collision_box[2][1] * 4
-        lab.collision_box[2][2] = lab.collision_box[2][2] * 4
+        lab.collision_box[1][1] = lab.collision_box[1][1] * 4.6
+        lab.collision_box[1][2] = lab.collision_box[1][2] * 4.4
+        lab.collision_box[2][1] = lab.collision_box[2][1] * 4.6
+        lab.collision_box[2][2] = lab.collision_box[2][2] * 4.4
 
         lab.selection_box[1][1] = lab.selection_box[1][1] * 4
         lab.selection_box[1][2] = lab.selection_box[1][2] * 4
