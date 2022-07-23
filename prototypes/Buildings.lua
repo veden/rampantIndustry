@@ -195,6 +195,8 @@ function buildings.enable()
 
         local greenhouse = table.deepcopy(data.raw["assembling-machine"]["assembling-machine-3"])
         greenhouse.name = "greenhouse-rampant-industry"
+        greenhouse.icon = nil
+        greenhouse.icons = {{icon = "__base__/graphics/icons/lab.png", icon_mipmaps = 4, icon_size = 64, tint={r=0.5,g=0.8,b=0.5}}}
         greenhouse.minable.result = "greenhouse-rampant-industry"
         greenhouse.collision_box[1][1] = greenhouse.collision_box[1][1] * 2.51
         greenhouse.collision_box[1][2] = greenhouse.collision_box[1][2] * 2.51
