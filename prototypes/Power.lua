@@ -258,7 +258,7 @@ function power.enable()
         solarTech.prerequisites = { "solar-energy", "electric-energy-distribution-2" }
         solarTech.unit =
             {
-                count = 400,
+                count = 800,
                 ingredients =
                     {
                         {"automation-science-pack", 1},
@@ -498,7 +498,7 @@ function power.enable()
         solarTech.prerequisites = { "electric-energy-accumulators", "electric-energy-distribution-2" }
         solarTech.unit =
             {
-                count = 400,
+                count = 800,
                 ingredients =
                     {
                         {"automation-science-pack", 1},

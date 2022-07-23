@@ -139,7 +139,7 @@ function technologies.enable()
                 iconMipmaps=4,
                 prerequisites = {"advanced-material-processing", "steel-processing", "production-science-pack"},
                 effects = {},
-                count = 200,
+                count = 800,
                 ingredients = {
                     {"automation-science-pack", 1},
                     {"logistic-science-pack", 1},
@@ -158,7 +158,7 @@ function technologies.enable()
                 iconMipmaps=4,
                 prerequisites = {"advanced-material-processing-2", "production-science-pack", "utility-science-pack"},
                 effects = {},
-                count = 300,
+                count = 1200,
                 ingredients = {
                     {"automation-science-pack", 1},
                     {"logistic-science-pack", 1},
@@ -178,7 +178,7 @@ function technologies.enable()
                 iconMipmaps=4,
                 prerequisites = {"advanced-oil-processing", "productivity-module-2", "production-science-pack", "utility-science-pack"},
                 effects = {},
-                count = 300,
+                count = 800,
                 ingredients = {
                     {"automation-science-pack", 1},
                     {"logistic-science-pack", 1},
@@ -198,7 +198,7 @@ function technologies.enable()
                 iconMipmaps=4,
                 prerequisites = {"automation-3", "productivity-module-2", "production-science-pack", "utility-science-pack"},
                 effects = {},
-                count = 300,
+                count = 800,
                 ingredients = {
                     {"automation-science-pack", 1},
                     {"logistic-science-pack", 1},
@@ -218,7 +218,7 @@ function technologies.enable()
                 iconMipmaps=4,
                 prerequisites = {"automation-3", "productivity-module-2", "production-science-pack", "utility-science-pack"},
                 effects = {},
-                count = 300,
+                count = 800,
                 ingredients = {
                     {"automation-science-pack", 1},
                     {"logistic-science-pack", 1},
@@ -238,7 +238,7 @@ function technologies.enable()
                 iconMipmaps=1,
                 prerequisites = {"automation-2", "oil-processing", "chemical-science-pack"},
                 effects = {},
-                count = 300,
+                count = 800,
                 ingredients = {
                     {"automation-science-pack", 1},
                     {"logistic-science-pack", 1},
@@ -254,7 +254,7 @@ function technologies.enable()
                 iconMipmaps=1,
                 prerequisites = {"rampant-industry-technology-air-filtering", "nuclear-power", "production-science-pack", "utility-science-pack"},
                 effects = {},
-                count = 600,
+                count = 1200,
                 ingredients = {
                     {"automation-science-pack", 1},
                     {"logistic-science-pack", 1},
