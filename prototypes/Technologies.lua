@@ -25,15 +25,17 @@ function technologies.enable()
         makeTechnology({
                 name="advanced-lab",
                 icon="__RampantIndustry__/graphics/technology/advanced-lab.png",
-                prerequisites = {"research-speed-2", "production-science-pack"},
+                prerequisites = {"research-speed-2", "space-science-pack"},
                 effects = {},
                 ingredients = {
                     {"automation-science-pack", 1},
                     {"logistic-science-pack", 1},
                     {"chemical-science-pack", 1},
-                    {"production-science-pack", 1}
+                    {"production-science-pack", 1},
+                    {"utility-science-pack", 1},
+                    {"space-science-pack", 1}
                 },
-                count = 800,
+                count = 5000,
                 time = 30
         })
     end
@@ -75,7 +77,7 @@ function technologies.enable()
                     {"logistic-science-pack", 1},
                     {"chemical-science-pack", 1}
                 },
-                count = 800,
+                count = 2000,
                 time = 30
         })
     end
@@ -86,15 +88,16 @@ function technologies.enable()
                 icon="__base__/graphics/technology/fluid-handling.png",
                 iconSize=256,
                 iconMipmaps=4,
-                prerequisites = {"fluid-handling", "production-science-pack"},
+                prerequisites = {"fluid-handling", "utility-science-pack"},
                 effects = {},
                 ingredients = {
                     {"automation-science-pack", 1},
                     {"logistic-science-pack", 1},
                     {"chemical-science-pack", 1},
-                    {"production-science-pack", 1}
+                    {"production-science-pack", 1},
+                    {"utility-science-pack", 1}
                 },
-                count = 800,
+                count = 2000,
                 time = 30
         })
     end
@@ -137,14 +140,16 @@ function technologies.enable()
                 icon="__base__/graphics/technology/advanced-material-processing.png",
                 iconSize=256,
                 iconMipmaps=4,
-                prerequisites = {"advanced-material-processing", "steel-processing", "production-science-pack"},
+                prerequisites = {"advanced-material-processing", "steel-processing", "space-science-pack"},
                 effects = {},
-                count = 800,
+                count = 3000,
                 ingredients = {
                     {"automation-science-pack", 1},
                     {"logistic-science-pack", 1},
                     {"chemical-science-pack", 1},
-                    {"production-science-pack", 1}
+                    {"production-science-pack", 1},
+                    {"utility-science-pack", 1},
+                    {"space-science-pack", 1}
                 },
                 time = 30
         })
@@ -156,15 +161,16 @@ function technologies.enable()
                 icon="__base__/graphics/technology/advanced-material-processing-2.png",
                 iconSize=256,
                 iconMipmaps=4,
-                prerequisites = {"advanced-material-processing-2", "production-science-pack", "utility-science-pack"},
+                prerequisites = {"rampant-industry-technology-advanced-material-processing-3", "space-science-pack"},
                 effects = {},
-                count = 1200,
+                count = 5000,
                 ingredients = {
                     {"automation-science-pack", 1},
                     {"logistic-science-pack", 1},
                     {"chemical-science-pack", 1},
                     {"production-science-pack", 1},
-                    {"utility-science-pack", 1}
+                    {"utility-science-pack", 1},
+                    {"space-science-pack", 1}
                 },
                 time = 60
         })
@@ -176,15 +182,16 @@ function technologies.enable()
                 icon="__base__/graphics/technology/oil-processing.png",
                 iconSize=256,
                 iconMipmaps=4,
-                prerequisites = {"advanced-oil-processing", "productivity-module-2", "production-science-pack", "utility-science-pack"},
+                prerequisites = {"advanced-oil-processing", "productivity-module-2", "space-science-pack"},
                 effects = {},
-                count = 800,
+                count = 5000,
                 ingredients = {
                     {"automation-science-pack", 1},
                     {"logistic-science-pack", 1},
                     {"chemical-science-pack", 1},
                     {"production-science-pack", 1},
-                    {"utility-science-pack", 1}
+                    {"utility-science-pack", 1},
+                    {"space-science-pack", 1}
                 },
                 time = 60
         })
@@ -196,15 +203,16 @@ function technologies.enable()
                 icon="__base__/graphics/technology/automation-3.png",
                 iconSize=256,
                 iconMipmaps=4,
-                prerequisites = {"automation-3", "productivity-module-2", "production-science-pack", "utility-science-pack"},
+                prerequisites = {"automation-3", "productivity-module-2", "space-science-pack"},
                 effects = {},
-                count = 800,
+                count = 5000,
                 ingredients = {
                     {"automation-science-pack", 1},
                     {"logistic-science-pack", 1},
                     {"chemical-science-pack", 1},
                     {"production-science-pack", 1},
-                    {"utility-science-pack", 1}
+                    {"utility-science-pack", 1},
+                    {"space-science-pack", 1}
                 },
                 time = 60
         })
@@ -216,15 +224,16 @@ function technologies.enable()
                 icon="__base__/graphics/technology/oil-gathering.png",
                 iconSize=256,
                 iconMipmaps=4,
-                prerequisites = {"automation-3", "productivity-module-2", "production-science-pack", "utility-science-pack"},
+                prerequisites = {"automation-3", "productivity-module-2", "space-science-pack"},
                 effects = {},
-                count = 800,
+                count = 5000,
                 ingredients = {
                     {"automation-science-pack", 1},
                     {"logistic-science-pack", 1},
                     {"chemical-science-pack", 1},
                     {"production-science-pack", 1},
-                    {"utility-science-pack", 1}
+                    {"utility-science-pack", 1},
+                    {"space-science-pack", 1}
                 },
                 time = 60
         })
@@ -260,7 +269,7 @@ function technologies.enable()
                     {"logistic-science-pack", 1},
                     {"chemical-science-pack", 1},
                     {"production-science-pack", 1},
-                    {"utility-science-pack", 1}
+                    {"utility-science-pack", 1},
                 },
                 time = 60
         })

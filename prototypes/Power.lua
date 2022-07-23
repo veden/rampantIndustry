@@ -255,16 +255,17 @@ function power.enable()
                 recipe = "advanced-solar-panel-rampant-industry"
             }
         }
-        solarTech.prerequisites = { "solar-energy", "electric-energy-distribution-2" }
+        solarTech.prerequisites = { "solar-energy", "electric-energy-distribution-2", "space-science-pack" }
         solarTech.unit =
             {
-                count = 800,
+                count = 6000,
                 ingredients =
                     {
                         {"automation-science-pack", 1},
                         {"logistic-science-pack", 1},
                         {"chemical-science-pack", 1},
-                        {"utility-science-pack", 1}
+                        {"utility-science-pack", 1},
+                        {"space-science-pack", 1}
                     },
                 time = 60
             }
@@ -495,16 +496,17 @@ function power.enable()
                 recipe = "advanced-accumulator-rampant-industry"
             }
         }
-        solarTech.prerequisites = { "electric-energy-accumulators", "electric-energy-distribution-2" }
+        solarTech.prerequisites = { "electric-energy-accumulators", "electric-energy-distribution-2", "space-science-pack" }
         solarTech.unit =
             {
-                count = 800,
+                count = 4000,
                 ingredients =
                     {
                         {"automation-science-pack", 1},
                         {"logistic-science-pack", 1},
                         {"chemical-science-pack", 1},
-                        {"utility-science-pack", 1}
+                        {"utility-science-pack", 1},
+                        {"space-science-pack", 1}
                     },
                 time = 60
             }
