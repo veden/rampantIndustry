@@ -720,6 +720,7 @@ function buildings.enable()
         airFilter.next_upgrade = nil
         airFilter.energy_usage = "1200KW"
         airFilter.energy_source.drain = "50KW"
+        airFilter.return_ingredients_on_change = false
         airFilter.match_speed_to_activity = true
         airFilter.match_volume_to_activity = true
         airFilter.crafting_speed = 1
@@ -1142,9 +1143,9 @@ function buildings.enable()
         recipePollution2.category = "air-filter-rampant-industry"
         recipePollution2.subgroup = "raw-material"
         recipePollution2.normal.ingredients = {
-            {name="clean-air-filter-rampant-industry", amount=6}
+            {name="clean-air-filter-rampant-industry", amount=2}
         }
-        recipePollution2.normal.energy_required = 90
+        recipePollution2.normal.energy_required = 30
         recipePollution2.normal.hide_from_player_crafting = true
         recipePollution2.normal.hidden = false
         recipePollution2.normal.enabled = true
@@ -1154,7 +1155,7 @@ function buildings.enable()
         recipePollution2.normal.show_amount_in_title = false
         recipePollution2.normal.result = nil
         recipePollution2.normal.results = {
-            {name="dirty-air-filter-rampant-industry", amount=6}
+            {name="dirty-air-filter-rampant-industry", amount=2}
         }
 
         local recipeAirFilter = table.deepcopy(data.raw["recipe"]["assembling-machine-2"])
